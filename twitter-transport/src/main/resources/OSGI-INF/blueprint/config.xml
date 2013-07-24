@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0" >
+	<bean id="twitterInboundTransportServiceBean" class="com.esri.geoevent.transport.twitter.TwitterInboundTransportService" activation="eager">
+		<property name="bundleContext" ref="blueprintBundleContext"/>
+	</bean> 
+	<bean id="twitterOutboundTransportServiceBean" class="com.esri.geoevent.transport.twitter.TwitterOutboundTransportService" activation="eager">
+		<property name="bundleContext" ref="blueprintBundleContext"/>
+	</bean>
+	<service id="twitterInboundTransportService" ref="twitterInboundTransportServiceBean" interface="com.esri.ges.transport.TransportService"/>
+	<service id="twitterOutboundTransportService" ref="twitterOutboundTransportServiceBean" interface="com.esri.ges.transport.TransportService"/>
+</blueprint>

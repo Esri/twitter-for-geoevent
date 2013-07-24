@@ -1,0 +1,148 @@
+<adapter name="Twitter" label="Twitter Inbound Adapter" domain="com.esri.ges.adapter.inbound" type="inbound">
+	<description>This adapter is capable of receiving/parsing Twitter data in the JSON format.</description>
+	<geoEventDefinitions>
+		<geoEventDefinition name="Twitter">
+			<fieldDefinitions>
+				<fieldDefinition name="coordinates" type="String"/>
+				<fieldDefinition name="favorited" type="Boolean"/>
+				<fieldDefinition name="created_at" type="Date"/>
+				<fieldDefinition name="truncated" type="Boolean"/>
+				<fieldDefinition name="id_str" type="String"/>
+				<fieldDefinition name="entities" type="Group">
+					<fieldDefinitions>
+						<fieldDefinition name="urls" type="String" cardinality="Many"/>
+						<fieldDefinition name="hashtags" type="Group" cardinality="Many">
+							<fieldDefinitions>
+								<fieldDefinition name="text" type="String"/>
+								<fieldDefinition name="indices" type="Integer" cardinality="Many"/>
+							</fieldDefinitions>				
+						</fieldDefinition>
+						<fieldDefinition name="media" type="Group" cardinality="Many">
+							<fieldDefinitions>
+								<fieldDefinition name="display_url" type="String" />
+								<fieldDefinition name="expanded_url" type="String" />
+								<fieldDefinition name="id" type="Long" />
+								<fieldDefinition name="id_str" type="String" />
+								<fieldDefinition name="indices" type="Integer" cardinality="Many" />
+								<fieldDefinition name="media_url" type="String" />
+								<fieldDefinition name="media_url_https" type="String" />
+								<fieldDefinition name="sizes" type="Group">
+									<fieldDefinitions>
+										<fieldDefinition name="large" type="Group">
+											<fieldDefinitions>
+												<fieldDefinition name="h" type="Integer" />
+												<fieldDefinition name="resize" type="String" />
+												<fieldDefinition name="w" type="Integer" />
+											</fieldDefinitions>
+										</fieldDefinition>
+										<fieldDefinition name="medium" type="Group">
+											<fieldDefinitions>
+												<fieldDefinition name="h" type="Integer" />
+												<fieldDefinition name="resize" type="String" />
+												<fieldDefinition name="w" type="Integer" />
+											</fieldDefinitions>
+										</fieldDefinition>
+										<fieldDefinition name="small" type="Group">
+											<fieldDefinitions>
+												<fieldDefinition name="h" type="Integer" />
+												<fieldDefinition name="resize" type="String" />
+												<fieldDefinition name="w" type="Integer" />
+											</fieldDefinitions>
+										</fieldDefinition>
+										<fieldDefinition name="thumb" type="Group">
+											<fieldDefinitions>
+												<fieldDefinition name="h" type="Integer" />
+												<fieldDefinition name="resize" type="String" />
+												<fieldDefinition name="w" type="Integer" />
+											</fieldDefinitions>
+										</fieldDefinition>
+										<fieldDefinition name="type" type="String" />										
+										<fieldDefinition name="url" type="String" />										
+									</fieldDefinitions>
+								</fieldDefinition>
+							</fieldDefinitions>
+						</fieldDefinition>
+						<fieldDefinition name="user_mentions" type="String" cardinality="Many"/>
+					</fieldDefinitions>				
+				</fieldDefinition>
+				<fieldDefinition name="in_reply_to_user_id_str" type="String"/>
+				<fieldDefinition name="text" type="String"/>
+				<fieldDefinition name="contributors" type="String"/>
+				<fieldDefinition name="retweet_count" type="Integer"/>
+				<fieldDefinition name="id" type="String"/>
+				<fieldDefinition name="in_reply_to_status_id_str" type="String"/>
+				<fieldDefinition name="geo" type="String"/>
+				<fieldDefinition name="retweeted" type="Boolean"/>
+				<fieldDefinition name="in_reply_to_user_id" type="String"/>
+				<fieldDefinition name="place" type="String"/>
+				<fieldDefinition name="possibly_sensitive" type="Boolean"/>
+				<fieldDefinition name="user" type="Group">
+					<fieldDefinitions>
+						<fieldDefinition name="name" type="String"/>
+						<fieldDefinition name="profile_sidebar_border_color" type="String"/>
+						<fieldDefinition name="profile_sidebar_fill_color" type="String"/>
+						<fieldDefinition name="profile_background_tile" type="Boolean"/>
+						<fieldDefinition name="profile_image_url" type="String"/>
+						<fieldDefinition name="created_at" type="Date"/>
+						<fieldDefinition name="location" type="String"/>
+						<fieldDefinition name="is_translator" type="Boolean"/>
+						<fieldDefinition name="follow_request_sent" type="Boolean"/>
+						<fieldDefinition name="id_str" type="String"/>
+						<fieldDefinition name="profile_link_color" type="String"/>
+						<fieldDefinition name="entities" type="Group">
+							<fieldDefinitions>
+								<fieldDefinition name="url" type="Group">
+									<fieldDefinitions>
+										<fieldDefinition name="urls" type="Group" cardinality="Many">
+											<fieldDefinitions>
+												<fieldDefinition name="expanded_url" type="String" />
+												<fieldDefinition name="url" type="String" />
+												<fieldDefinition name="indices" type="Integer" cardinality="Many" />
+												<fieldDefinition name="display_url" type="String" />
+											</fieldDefinitions>
+										</fieldDefinition>	
+									</fieldDefinitions>
+								</fieldDefinition>
+								<fieldDefinition name="description" type="Group">
+									<fieldDefinitions>
+										<fieldDefinition name="urls" type="String" cardinality="Many"/>
+									</fieldDefinitions>				
+								</fieldDefinition>
+							</fieldDefinitions>				
+						</fieldDefinition>
+						<fieldDefinition name="default_profile" type="Boolean"/>
+						<fieldDefinition name="contributors_enabled" type="Boolean"/>
+						<fieldDefinition name="url" type="String"/>
+						<fieldDefinition name="favourites_count" type="Long"/>
+						<fieldDefinition name="utc_offset" type="Integer"/>
+						<fieldDefinition name="id" type="Long"/>
+						<fieldDefinition name="profile_image_url_https" type="String"/>
+						<fieldDefinition name="profile_use_background_image" type="Boolean"/>
+						<fieldDefinition name="listed_count" type="Integer"/>
+						<fieldDefinition name="protected" type="Boolean"/>
+						<fieldDefinition name="lang" type="String"/>
+						<fieldDefinition name="followers_count" type="Long"/>
+						<fieldDefinition name="time_zone" type="Boolean"/>
+						<fieldDefinition name="profile_background_image_url_https" type="String"/>
+						<fieldDefinition name="verified" type="Boolean"/>
+						<fieldDefinition name="profile_background_color" type="String"/>
+						<fieldDefinition name="notifications" type="Boolean"/>
+						<fieldDefinition name="description" type="String"/>
+						<fieldDefinition name="geo_enabled" type="Boolean"/>
+						<fieldDefinition name="statuses_count" type="Integer"/>
+						<fieldDefinition name="default_profile_image" type="Boolean"/>
+						<fieldDefinition name="friends_count" type="Integer"/>
+						<fieldDefinition name="profile_background_image_url" type="String"/>
+						<fieldDefinition name="show_all_inline_media" type="Boolean"/>
+						<fieldDefinition name="screen_name" type="String"/>
+						<fieldDefinition name="following" type="Boolean"/>						
+					</fieldDefinitions>				
+				</fieldDefinition>
+				<fieldDefinition name="source" type="String"/>						
+				<fieldDefinition name="in_reply_to_screen_name" type="String"/>						
+				<fieldDefinition name="in_reply_to_status_id" type="String"/>										
+			</fieldDefinitions>
+		</geoEventDefinition>
+	</geoEventDefinitions>
+</adapter>
+				
