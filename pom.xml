@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.esri.geoevent.parent</groupId>
+  <artifactId>twitter</artifactId>
+  <version>10.2.0</version>
+  <packaging>pom</packaging>
+
+  <name>Esri :: GeoEvent :: Twitter</name>
+  <url>http://www.esri.com</url>
+  
+  <properties>
+    <contact.address>geoevent@esri.com</contact.address>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <geometry-api.version>1.6.0</geometry-api.version>
+    <maven.bundle.plugin.version>2.3.6</maven.bundle.plugin.version>
+    <junit.version>4.8.1</junit.version>
+    <jackson.version>1.9.5</jackson.version>
+  </properties>
+
+  <modules>
+    <module>twitter-adapter</module>
+    <module>twitter-transport</module>
+  </modules>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>commons-logging</groupId>
+        <artifactId>commons-logging</artifactId>
+        <version>1.1.1</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>com.esri.ges.sdk</groupId>
+      <artifactId>ges-lib</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.felix</groupId>
+          <artifactId>maven-bundle-plugin</artifactId>
+          <extensions>true</extensions>
+          <version>${maven.bundle.plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>2.5.1</version>
+          <configuration>
+            <source>1.6</source>
+            <target>1.6</target>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+  <repositories>
+    <repository>
+      <id>ages-sdk-repo</id>
+      <url>file://${project.basedir}/../../repository</url>
+    </repository>
+  </repositories>
+</project>

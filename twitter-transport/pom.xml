@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.esri.geoevent.parent</groupId>
+		<artifactId>twitter</artifactId>
+		<version>10.2.0</version>
+	</parent>
+	<groupId>com.esri.geoevent.transport</groupId>
+	<artifactId>twitter-transport</artifactId>
+	<name>Esri :: GeoEvent :: Transport :: Twitter</name>
+	<packaging>bundle</packaging>
+	<dependencies>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>[1.2.9,)</version>
+			<scope>provided</scope>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>com.esri.geoevent.transport</groupId>
+			<artifactId>http-transport</artifactId>
+			<version>10.2.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/http-transport-10.2.0.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>com.esri.geoevent.transport</groupId>
+			<artifactId>httpoauth-transport</artifactId>
+			<version>10.2.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/httpoauth-transport-10.2.0.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.2</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
+						<Bundle-ContactAddress>${contact.address}</Bundle-ContactAddress>
+						<Bundle-Version>${project.version}</Bundle-Version>
+						<AGES-Domain>com.esri.geoevent.transport</AGES-Domain>
+						<Export-Package />
+						<Private-Package>com.esri.geoevent.transport.twitter,twitter4j.*</Private-Package>
+					</instructions>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
