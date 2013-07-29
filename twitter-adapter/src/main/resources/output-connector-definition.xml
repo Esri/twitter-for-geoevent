@@ -1,8 +1,8 @@
-<connectorDefinition label="Twitter Input Connector"
-	name="twitter-in" type="inbound">
-	<adapter uri="com.esri.geoevent.adapter.inbound/twitter/10.2.0" />
-	<defaultName>twitter-in</defaultName>
-	<description>Receive Tweet status updates from Twitter streaming service</description>
+<connectorDefinition label="Twitter Output Connector"
+	name="twitter-out" type="outbound">
+	<adapter uri="com.esri.geoevent.adapter.outbound/twitter/10.2.0" />
+	<defaultName>twitter-out</defaultName>
+	<description>Send Tweet status updates to Twitter</description>
 	<properties>
 		<advanced>
 		
@@ -27,11 +27,7 @@
 	        <property name="consumerSecret" label="ConsumerSecret" source="transport" />
 	        <property name="accessToken" label="AccessToken" source="transport" />
 	        <property name="accessTokenSecret" label="AccessTokenSecret" source="transport" />
-	        <property name="follow" label="Follow" source="transport" />
-	        <property name="track" label="Track" source="transport" />
-	        <property name="locations" label="Locations" source="transport"/>
-	        <property name="count" label="Count" default="0"  source="transport" />			
 		</shown>
 	</properties>
-	<transport uri="com.esri.ges.transport.inbound/Twitter2/10.2.0" />
+	<transport uri="com.esri.ges.transport.outbound/Twitter/10.2.0" />
 </connectorDefinition>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<transport name="Twitter2" domain="com.esri.ges.transport.outbound" type="outbound">
-	<description>Twitter2 Outbound HTTP Transport using Open Authentication.</description>
+<transport name="Twitter" domain="com.esri.ges.transport.outbound" type="outbound">
+	<description>Twitter Outbound HTTP Transport using Open Authentication.</description>
 	<propertyDefinitions>
         <propertyDefinition propertyName="consumerKey" label="ConsumerKey" description="Consumer Key" propertyType="String" mandatory="true"  readOnly="false" defaultValue=""/>
         <propertyDefinition propertyName="consumerSecret" label="ConsumerSecret" description="Consumer Secret" propertyType="String" mandatory="true"  readOnly="false" defaultValue=""/>

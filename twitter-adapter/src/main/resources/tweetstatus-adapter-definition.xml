@@ -3,7 +3,7 @@
 	<geoEventDefinitions>
 		<geoEventDefinition name="TweetStatus">
 			<fieldDefinitions>
-				<fieldDefinition name="adapter-definition.xml" type="Boolean"/>
+				<fieldDefinition name="possibly_sensitive_editable" type="Boolean"/>
 				<fieldDefinition name="text" type="String"/>
 				
 				<fieldDefinition name="created_at" type="Date">

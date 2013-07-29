@@ -14,7 +14,7 @@ public class TweetStatusAdapterService extends AdapterServiceBase
     XmlAdapterDefinition xmlAdapterDefinition = new XmlAdapterDefinition(getResourceAsStream("tweetstatus-adapter-definition.xml"));
     try
     {
-      xmlAdapterDefinition.loadConnector(getResourceAsStream("connector-definition.xml"));
+      xmlAdapterDefinition.loadConnector(getResourceAsStream("input-connector-definition.xml"));
     }
     catch (JAXBException e)
     {
