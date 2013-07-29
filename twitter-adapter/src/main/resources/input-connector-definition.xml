@@ -21,7 +21,8 @@
 			<property label="Parameters" name="clientParameters" source="transport" />
 			<property label="URL Proxy" name="clientURLProxy" source="transport" />
 			<property label="Use URL Proxy" name="useClientURLProxy" default="false" source="transport" />
-			<property label="Acceptable MIME Types (Server Mode)" name="acceptableMimeTypesServerMode" source="transport" />		</hidden>
+			<property label="Acceptable MIME Types (Server Mode)" name="acceptableMimeTypesServerMode" source="transport" />
+		</hidden>
 		<shown>
 	        <property name="consumerKey" label="ConsumerKey" source="transport" />
 	        <property name="consumerSecret" label="ConsumerSecret" source="transport" />
