@@ -61,8 +61,8 @@ public class TwitterOutboundTransport extends HttpOutboundTransport
     byte[] data = new byte[bb.remaining()];
     bb.get(data);
 
-    postBodyOrg = new String(data);
-    postBody = OAuth.encodePostBody("status=" + postBodyOrg);
+    postBodyOrg = "status=" + new String(data);
+    postBody = OAuth.encodePostBody(postBodyOrg);
     log.debug(postBody);
 
     // super.receive(bb, channelId);
