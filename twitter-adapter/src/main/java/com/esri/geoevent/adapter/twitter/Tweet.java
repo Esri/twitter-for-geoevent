@@ -1,3 +1,27 @@
+/*
+  Copyright 1995-2013 Esri
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+  For additional information, contact:
+  Environmental Systems Research Institute, Inc.
+  Attn: Contracts Dept
+  380 New York Street
+  Redlands, California, USA 92373
+
+  email: contracts@esri.com
+*/
+
 package com.esri.geoevent.adapter.twitter;
 
 import java.util.ArrayList;
@@ -10,7 +34,7 @@ public class Tweet
   public static class Coordinates
   {
     private ArrayList<Double> _coordinates;
-    private String _type;
+    private String            _type;
 
     public ArrayList<Double> getCoordinates()
     {
@@ -42,7 +66,7 @@ public class Tweet
   public static class BoundingBox
   {
     private ArrayList<ArrayList<ArrayList<Double>>> _coordinates;
-    private String _type;
+    private String                                  _type;
 
     public ArrayList<ArrayList<ArrayList<Double>>> getCoordinates()
     {
@@ -75,13 +99,13 @@ public class Tweet
   public static class Place
   {
     private BoundingBox _bounding_box;
-    private String _country;
-    private String _country_code;
-    private String _full_name;
-    private String _id;
-    private String _name;
-    private String _place_type;
-    private String _url;
+    private String      _country;
+    private String      _country_code;
+    private String      _full_name;
+    private String      _id;
+    private String      _name;
+    private String      _place_type;
+    private String      _url;
 
     public BoundingBox getBounding_box()
     {
@@ -174,7 +198,7 @@ public class Tweet
   {
     private String _id_str;
     private String _name;
-    private int _followers_count;
+    private int    _followers_count;
     private String _location;
     private String _screen_name;
 
@@ -235,21 +259,21 @@ public class Tweet
     }
   }
 
-  private Boolean _possibly_sensitive_editable;
-  private String _text;
-  private String _created_at;
-  private Boolean _retweeted;
-  private Integer _retweet_count;
-  private Place _place;
+  private Boolean     _possibly_sensitive_editable;
+  private String      _text;
+  private String      _created_at;
+  private Boolean     _retweeted;
+  private Integer     _retweet_count;
+  private Place       _place;
   private Coordinates _coordinates;
-  private String _id_str;
-  private String _in_reply_to_screen_name;
-  private String _in_reply_to_status_id_str;
-  private Boolean _favorited;
-  private Boolean _truncated;
-  private Boolean _possibly_sensitive;
-  private String _in_reply_to_user_id_str;
-  private User _user;
+  private String      _id_str;
+  private String      _in_reply_to_screen_name;
+  private String      _in_reply_to_status_id_str;
+  private Boolean     _favorited;
+  private Boolean     _truncated;
+  private Boolean     _possibly_sensitive;
+  private String      _in_reply_to_user_id_str;
+  private User        _user;
 
   public User getUser()
   {
