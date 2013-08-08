@@ -3,9 +3,9 @@
 	<description>Twitter Inbound HTTP Transport using Open Authentication.</description>
 	<propertyDefinitions>
         <propertyDefinition propertyName="consumerKey" label="ConsumerKey" description="Consumer Key" propertyType="String" mandatory="true"  readOnly="false" defaultValue=""/>
-        <propertyDefinition propertyName="consumerSecret" label="ConsumerSecret" description="Consumer Secret" propertyType="Password" mandatory="true"  readOnly="false" defaultValue=""/>
+        <propertyDefinition propertyName="consumerSecret" label="ConsumerSecret" description="Consumer Secret" propertyType="String" mandatory="true"  readOnly="false" defaultValue=""/>
         <propertyDefinition propertyName="accessToken" label="AccessToken" description="Access Token" propertyType="String" mandatory="true"  readOnly="false" defaultValue=""/>
-        <propertyDefinition propertyName="accessTokenSecret" label="AccessTokenSecret" description="Access Token Secret" propertyType="Password" mandatory="true"  readOnly="false" defaultValue=""/>
+        <propertyDefinition propertyName="accessTokenSecret" label="AccessTokenSecret" description="Access Token Secret" propertyType="String" mandatory="true"  readOnly="false" defaultValue=""/>
         <propertyDefinition propertyName="follow" label="Follow" description="A comma-separated list of user IDs." propertyType="String" mandatory="false"  readOnly="false" defaultValue=""/>
         <propertyDefinition propertyName="track" label="Track" description="A comma-separated list of phrases." propertyType="String" mandatory="false"  readOnly="false" defaultValue=""/>
         <propertyDefinition propertyName="locations" label="Locations" description="A comma-separated list of (longitude,latitude) pairs indicating bounding boxes of locations (use ',' to seperate both the coordinate values and the bounding boxes." propertyType="String" mandatory="false"  readOnly="false" defaultValue=""/>
