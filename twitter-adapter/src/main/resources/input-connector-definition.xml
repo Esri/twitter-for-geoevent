@@ -1,8 +1,8 @@
-<connectorDefinition label="Twitter Input Connector"
-	name="twitter-in" type="inbound">
-	<adapter uri="com.esri.geoevent.adapter/Twitter/10.2.0" />
-	<defaultName>twitter-in</defaultName>
+<connectorDefinition label="Twitter Input Connector" name="twitter-in" type="inbound">
 	<description>Receive Tweet status updates from Twitter streaming service</description>
+	<defaultName>twitter-in</defaultName>
+	<transport uri="com.esri.geoevent.transport.inbound/Twitter/10.2.0" />
+	<adapter uri="com.esri.geoevent.adapter.inbound/Twitter/10.2.0" />
 	<properties>
 		<hidden>
 			<property label="Mode" name="mode" default="CLIENT" source="transport" />
@@ -17,18 +17,18 @@
 			<property label="URL Proxy" name="clientURLProxy" source="transport" />
 			<property label="Use URL Proxy" name="useClientURLProxy" default="false" source="transport" />
 			<property label="Acceptable MIME Types (Server Mode)" name="acceptableMimeTypesServerMode" source="transport" />
-			<property label="URL" name="clientURL" default="https://stream.twitter.com/1.1/statuses/filter.json" source="transport" />
+			<property label="URL" name="clientURL" default="https://stream.twitter.com/1.1/statuses/filter.json"
+				source="transport" />
 		</hidden>
 		<shown>
-	        <property name="consumerKey" label="ConsumerKey" source="transport" />
-	        <property name="consumerSecret" label="ConsumerSecret" source="transport" />
-	        <property name="accessToken" label="AccessToken" source="transport" />
-	        <property name="accessTokenSecret" label="AccessTokenSecret" source="transport" />
-	        <property name="follow" label="Follow" source="transport" />
-	        <property name="track" label="Track" source="transport" />
-	        <property name="locations" label="Locations" source="transport"/>
-	        <property name="count" label="Count" default="0"  source="transport" />			
+			<property name="consumerKey" label="ConsumerKey" source="transport" />
+			<property name="consumerSecret" label="ConsumerSecret" source="transport" />
+			<property name="accessToken" label="AccessToken" source="transport" />
+			<property name="accessTokenSecret" label="AccessTokenSecret" source="transport" />
+			<property name="follow" label="Follow" source="transport" />
+			<property name="track" label="Track" source="transport" />
+			<property name="locations" label="Locations" source="transport" />
+			<property name="count" label="Count" default="0" source="transport" />
 		</shown>
 	</properties>
-	<transport uri="com.esri.geoevent.transport/Twitter/10.2.0" />
 </connectorDefinition>

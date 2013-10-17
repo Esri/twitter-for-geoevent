@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<transport name="Twitter" domain="com.esri.ges.transport.outbound" type="outbound">
+<transport name="Twitter" domain="com.esri.geoevent.transport.outbound" type="outbound">
 	<description>Twitter Outbound HTTP Transport using Open Authentication.</description>
 	<propertyDefinitions>
-        <propertyDefinition propertyName="consumerKey" label="ConsumerKey" description="Consumer Key" propertyType="Password" mandatory="true"  readOnly="false" defaultValue=""/>
-        <propertyDefinition propertyName="consumerSecret" label="ConsumerSecret" description="Consumer Secret" propertyType="Password" mandatory="true"  readOnly="false" defaultValue=""/>
-        <propertyDefinition propertyName="accessToken" label="AccessToken" description="Access Token" propertyType="Password" mandatory="true"  readOnly="false" defaultValue=""/>
-        <propertyDefinition propertyName="accessTokenSecret" label="AccessTokenSecret" description="Access Token Secret" propertyType="Password" mandatory="true"  readOnly="false" defaultValue=""/>
+		<propertyDefinition propertyName="consumerKey" label="ConsumerKey" description="Consumer Key" propertyType="Password" mandatory="true"  readOnly="false" defaultValue=""/>
+		<propertyDefinition propertyName="consumerSecret" label="ConsumerSecret" description="Consumer Secret" propertyType="Password" mandatory="true"  readOnly="false" defaultValue=""/>
+		<propertyDefinition propertyName="accessToken" label="AccessToken" description="Access Token" propertyType="Password" mandatory="true"  readOnly="false" defaultValue=""/>
+		<propertyDefinition propertyName="accessTokenSecret" label="AccessTokenSecret" description="Access Token Secret" propertyType="Password" mandatory="true"  readOnly="false" defaultValue=""/>
 	</propertyDefinitions>
 </transport>
