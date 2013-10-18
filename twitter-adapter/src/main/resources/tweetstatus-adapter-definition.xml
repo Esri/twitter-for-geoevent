@@ -27,7 +27,7 @@
 					</fieldDefinitionTag>
 				</fieldDefinition>
 				<fieldDefinition name="in_reply_to_screen_name" type="String"/>
-				<fieldDefinition name="in_reply_to_status_id_str" type="Integer"/>
+				<fieldDefinition name="in_reply_to_status_id_str" type="String"/>
 				<fieldDefinition name="favorited" type="Boolean"/>
 				<fieldDefinition name="truncated" type="Boolean"/>
 				<fieldDefinition name="possibly_sensitive" type="Boolean"/>

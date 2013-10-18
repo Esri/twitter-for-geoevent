@@ -187,7 +187,7 @@ public class TweetStatusAdapter extends InboundAdapterBase
       }
       catch (Exception e)
       {
-        LOG.warn("Parse date exception in TweetStatusAdapter: " + e.getMessage());
+        LOG.warn("Parse date exception in TweetStatusAdapter (" + jsonTweet.getCreated_at() + "): " + e.getMessage());
         LOG.debug(e.getMessage(), e);
       }
       msg.setField(3, jsonTweet.getRetweeted());
