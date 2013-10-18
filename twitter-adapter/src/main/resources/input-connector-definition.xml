@@ -1,5 +1,5 @@
-<connectorDefinition label="Twitter Input Connector" name="twitter-in" type="inbound">
-	<description>Receive Tweet status updates from Twitter streaming service</description>
+<connectorDefinition label="Receive Tweets" name="twitter-in" type="inbound">
+	<description>Receive tweets from twitter profiles or based on term(s) of interest using the public Twitter API.</description>
 	<defaultName>twitter-in</defaultName>
 	<transport uri="com.esri.geoevent.transport.inbound/Twitter/10.2.0" />
 	<adapter uri="com.esri.geoevent.adapter.inbound/Twitter/10.2.0" />

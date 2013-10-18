@@ -1,9 +1,8 @@
-<connectorDefinition label="Twitter Output Connector"
-	name="twitter-out" type="outbound">
+<connectorDefinition label="Send Tweet" name="twitter-out" type="outbound">
+	<description>Send a tweet to Twitter using the public Twitter API.</description>
 	<adapter uri="com.esri.ges.adapter.outbound/MessageFormatter/10.2.0" />
 	<transport uri="com.esri.geoevent.transport.outbound/Twitter/10.2.0" />
 	<defaultName>twitter-out</defaultName>
-	<description>Send Tweet status updates to Twitter</description>
 	<properties>
 		<advanced>
 			<property label="URL" name="clientURL" default="https://api.twitter.com/1.1/statuses/update.json" source="transport" />
