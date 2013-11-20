@@ -121,7 +121,7 @@ public class TwitterOutboundTransport extends HttpOutboundTransport
       String value = (String) getProperty(OAuth.CONSUMER_KEY).getValue();
       if (value.length() > 0)
       {
-        consumerKey = value;
+        consumerKey = cryptoService.decrypt(value);
       }
     }
     if (getProperty(OAuth.CONSUMER_SECRET).isValid())
@@ -129,7 +129,7 @@ public class TwitterOutboundTransport extends HttpOutboundTransport
       String value = (String) getProperty(OAuth.CONSUMER_SECRET).getValue();
       if (value.length() > 0)
       {
-        consumerSecret = value;
+        consumerSecret = cryptoService.decrypt(value);
       }
     }
     if (getProperty(OAuth.ACCESS_TOKEN).isValid())
@@ -137,7 +137,7 @@ public class TwitterOutboundTransport extends HttpOutboundTransport
       String value = (String) getProperty(OAuth.ACCESS_TOKEN).getValue();
       if (value.length() > 0)
       {
-        accessToken = value;
+        accessToken = cryptoService.decrypt(value);
       }
     }
     if (getProperty(OAuth.ACCESS_TOKEN_SECRET).isValid())
@@ -145,9 +145,8 @@ public class TwitterOutboundTransport extends HttpOutboundTransport
       String value = (String) getProperty(OAuth.ACCESS_TOKEN_SECRET).getValue();
       if (value.length() > 0)
       {
-        accessTokenSecret = value;
+        accessTokenSecret = cryptoService.decrypt(value);
       }
     }
   }
-
 }
