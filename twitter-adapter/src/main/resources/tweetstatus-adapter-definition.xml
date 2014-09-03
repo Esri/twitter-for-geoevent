@@ -1,5 +1,5 @@
-<adapter name="Twitter" label="Twitter Inbound Adapter" domain="com.esri.geoevent.adapter.inbound" type="inbound">
-	<description>This adapter is capable of receiving/parsing Twitter data in the JSON format.</description>
+<adapter name="Twitter" label="${com.esri.geoevent.adapter.twitter-adapter.ADAPTER_LABEL}" domain="com.esri.geoevent.adapter.inbound" type="inbound">
+	<description>${com.esri.geoevent.adapter.twitter-adapter.ADAPTER_DESC}</description>
 	<geoEventDefinitions>
 		<geoEventDefinition name="TweetStatus">
 			<fieldDefinitions>

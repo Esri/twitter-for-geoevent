@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <transport name="Twitter" domain="com.esri.geoevent.transport.inbound" type="inbound">
-	<description>Twitter Inbound HTTP Transport using Open Authentication.</description>
+	<description>${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_DESC}</description>
 	<propertyDefinitions>
-		<propertyDefinition propertyName="consumerKey" label="ConsumerKey" description="Consumer Key" propertyType="Password" mandatory="true"  readOnly="false" defaultValue=""/>
-		<propertyDefinition propertyName="consumerSecret" label="ConsumerSecret" description="Consumer Secret" propertyType="Password" mandatory="true"  readOnly="false" defaultValue=""/>
-		<propertyDefinition propertyName="accessToken" label="AccessToken" description="Access Token" propertyType="Password" mandatory="true"  readOnly="false" defaultValue=""/>
-		<propertyDefinition propertyName="accessTokenSecret" label="AccessTokenSecret" description="Access Token Secret" propertyType="Password" mandatory="true"  readOnly="false" defaultValue=""/>
-		<propertyDefinition propertyName="follow" label="Follow" description="A comma-separated list of user IDs." propertyType="String" mandatory="false"  readOnly="false" defaultValue=""/>
-		<propertyDefinition propertyName="track" label="Track" description="A comma-separated list of phrases." propertyType="String" mandatory="false"  readOnly="false" defaultValue=""/>
-		<propertyDefinition propertyName="locations" label="Locations" description="A comma-separated list of (longitude,latitude) pairs indicating bounding boxes of locations (use ',' to seperate both the coordinate values and the bounding boxes." propertyType="String" mandatory="false"  readOnly="false" defaultValue=""/>
-		<propertyDefinition propertyName="count" label="Count" description="Number of backfill missed messages during disconnected. This parameter requires elevated access to use." propertyType="Integer" mandatory="false"  readOnly="false" defaultValue="0"/>
+		<propertyDefinition propertyName="consumerKey" label="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_CONSUMER_KEY_LBL}" description="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_CONSUMER_KEY_LBL}" propertyType="Password" mandatory="true"  readOnly="false" defaultValue=""/>
+		<propertyDefinition propertyName="consumerSecret" label="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_CONSUMER_SECRET_LBL}" description="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_CONSUMER_SECRET_LBL}" propertyType="Password" mandatory="true"  readOnly="false" defaultValue=""/>
+		<propertyDefinition propertyName="accessToken" label="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_ACCESS_TOKEN_LBL}" description="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_ACCESS_TOKEN_LBL}" propertyType="Password" mandatory="true"  readOnly="false" defaultValue=""/>
+		<propertyDefinition propertyName="accessTokenSecret" label="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_ACCESS_TOKEN_SECRET_LBL}" description="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_ACCESS_TOKEN_SECRET_LBL}" propertyType="Password" mandatory="true"  readOnly="false" defaultValue=""/>
+		<propertyDefinition propertyName="follow" label="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_FOLLOW_LBL}" description="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_FOLLOW_DESC}" propertyType="String" mandatory="false"  readOnly="false" defaultValue=""/>
+		<propertyDefinition propertyName="track" label="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_TRACK_LBL}" description="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_TRACK_DESC}" propertyType="String" mandatory="false"  readOnly="false" defaultValue=""/>
+		<propertyDefinition propertyName="locations" label="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_LOCATIONS_LBL}" description="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_LOCATIONS_DESC}" propertyType="String" mandatory="false"  readOnly="false" defaultValue=""/>
+		<propertyDefinition propertyName="count" label="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_COUNT_LBL}" description="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_COUNT_DESC}" propertyType="Integer" mandatory="false"  readOnly="false" defaultValue="0"/>
 	</propertyDefinitions>
 </transport>

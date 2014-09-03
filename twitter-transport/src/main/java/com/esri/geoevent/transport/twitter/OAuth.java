@@ -41,12 +41,12 @@ import java.util.TreeMap;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.esri.ges.framework.i18n.BundleLogger;
+import com.esri.ges.framework.i18n.BundleLoggerFactory;
 
 public class OAuth
 {
-  private static final Log logger = LogFactory.getLog(OAuth.class);
+  private static final BundleLogger LOGGER = BundleLoggerFactory.getLogger(OAuth.class);
 
   public final static class BASE64Encoder
   {
@@ -134,7 +134,7 @@ public class OAuth
   public static final String ACCESS_TOKEN_SECRET    = "accessTokenSecret";
   public static final String UTF_8                  = "UTF-8";
   private static Random      RAND                   = new Random();
-
+  
   public static Long getUserIdFromAccessToken(String accessToken)
   {
     // Get userId from accessToken
@@ -150,7 +150,7 @@ public class OAuth
     }
     catch (IndexOutOfBoundsException e)
     {
-      throw new IllegalArgumentException("Invalid access token format.");
+      throw new IllegalArgumentException( LOGGER.translate("INVALID_ACCESS_TOKEN") );
     }
     return userId;
   }
@@ -202,7 +202,7 @@ public class OAuth
     String realm = null;
     String authorizationHeader = generateAuthorizationHeader(httpMethod, clientUrl, params, nonce, timestamp, accessToken, accessTokenSecret, consumerKey, consumerSecret, realm);
 
-    logger.debug(authorizationHeader);
+    LOGGER.debug(authorizationHeader);
     return authorizationHeader;
   }
 
@@ -229,7 +229,7 @@ public class OAuth
       }
       catch (UnsupportedEncodingException ignore)
       {
-        logger.error(ignore.getMessage(), ignore);
+        LOGGER.error(ignore.getMessage(), ignore);
       }
     }
   }

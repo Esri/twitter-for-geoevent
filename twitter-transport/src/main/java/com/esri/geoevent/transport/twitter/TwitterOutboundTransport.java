@@ -26,11 +26,11 @@ package com.esri.geoevent.transport.twitter;
 
 import java.nio.ByteBuffer;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpRequest;
 
 import com.esri.ges.core.component.ComponentException;
+import com.esri.ges.framework.i18n.BundleLogger;
+import com.esri.ges.framework.i18n.BundleLoggerFactory;
 import com.esri.ges.transport.TransportContext;
 import com.esri.ges.transport.TransportDefinition;
 import com.esri.ges.transport.http.HttpOutboundTransport;
@@ -38,14 +38,14 @@ import com.esri.ges.transport.http.HttpTransportContext;
 
 public class TwitterOutboundTransport extends HttpOutboundTransport
 {
-  static final private Log log = LogFactory.getLog(TwitterOutboundTransport.class);
+  static final private BundleLogger LOGGER = BundleLoggerFactory.getLogger(TwitterOutboundTransport.class);
 
   private String           consumerKey;
   private String           consumerSecret;
   private String           accessToken;
   private String           accessTokenSecret;
   private String           postBodyOrg;
-
+  
   public TwitterOutboundTransport(TransportDefinition definition) throws ComponentException
   {
     super(definition);
@@ -55,14 +55,14 @@ public class TwitterOutboundTransport extends HttpOutboundTransport
   public synchronized void start()
   {
     super.start();
-    log.debug("Http-Oauth-Outbound started.");
+    LOGGER.debug( "OUTBOUND_START" );
   }
 
   @Override
   public synchronized void stop()
   {
     super.stop();
-    log.debug("Http-Oauth-Outbound stopped.");
+    LOGGER.debug( "OUTBOUND_STOP" );
   }
 
   @Override
@@ -75,7 +75,7 @@ public class TwitterOutboundTransport extends HttpOutboundTransport
     }
     catch (Exception e)
     {
-      log.error(e.getMessage(), e);
+      LOGGER.error(e.getMessage(), e);
     }
   }
 
@@ -87,7 +87,7 @@ public class TwitterOutboundTransport extends HttpOutboundTransport
 
     postBodyOrg = "status=" + new String(data);
     postBody = OAuth.encodePostBody(postBodyOrg);
-    log.debug(postBody);
+    LOGGER.debug(postBody);
 
     // super.receive(bb, channelId);
     doHttp();
@@ -111,7 +111,7 @@ public class TwitterOutboundTransport extends HttpOutboundTransport
   @Override
   public void validate()
   {
-    log.debug("Outbound Skip validation...");
+    LOGGER.debug("Outbound Skip validation...");
   }
 
   public void applyProperties() throws Exception

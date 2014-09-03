@@ -24,19 +24,20 @@
 
 package com.esri.geoevent.transport.twitter;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpRequest;
 
 import com.esri.ges.core.component.ComponentException;
+import com.esri.ges.framework.i18n.BundleLogger;
+import com.esri.ges.framework.i18n.BundleLoggerFactory;
 import com.esri.ges.transport.TransportContext;
 import com.esri.ges.transport.TransportDefinition;
 import com.esri.ges.transport.http.HttpInboundTransport;
 import com.esri.ges.transport.http.HttpTransportContext;
+import com.esri.ges.util.Validator;
 
 public class TwitterInboundTransport extends HttpInboundTransport
 {
-  static final private Log logger    = LogFactory.getLog(TwitterInboundTransport.class);
+  static final private BundleLogger LOGGER    = BundleLoggerFactory.getLogger(TwitterInboundTransport.class);
 
   private String           consumerKey;
   private String           consumerSecret;
@@ -48,7 +49,7 @@ public class TwitterInboundTransport extends HttpInboundTransport
   private String[]         tracks    = null;
   private double[][]       locations = null;
   private int              count     = -1;
-
+  
   public TwitterInboundTransport(TransportDefinition definition) throws ComponentException
   {
     super(definition);
@@ -58,14 +59,15 @@ public class TwitterInboundTransport extends HttpInboundTransport
   public synchronized void start()
   {
     super.start();
-    logger.debug("Http-Oauth-Inbound started.");
+    
+    LOGGER.debug( "INBOUND_START" );
   }
 
   @Override
   public synchronized void stop()
   {
     super.stop();
-    logger.debug("Http-Oauth-Inbound stopped.");
+    LOGGER.debug( "INBOUND_STOP" );
   }
 
   @Override
@@ -78,12 +80,12 @@ public class TwitterInboundTransport extends HttpInboundTransport
       // encode the postBody
       postBodyOrg = postBody;
       postBody = OAuth.encodePostBody(postBodyOrg);
-      logger.debug(postBody);
+      LOGGER.debug(postBody);
       consoleDebugPrintLn(postBody);
     }
     catch (Exception e)
     {
-      logger.error(e.getMessage(), e);
+      LOGGER.error(e.getMessage(), e);
     }
   }
 
@@ -106,14 +108,14 @@ public class TwitterInboundTransport extends HttpInboundTransport
   public void validate()
   {
 
-    logger.debug("Inbound Skip validation...");
+    LOGGER.debug( "INBOUND_SKIP_VALIDATION" );
   }
 
   @Override
   public void onReceive(TransportContext context)
   {
     super.onReceive(context);
-    consoleDebugPrintLn("onReceive");
+    consoleDebugPrintLn( "INBOUND_ON_RECEIVE" );
   }
 
   public void applyProperties() throws Exception
@@ -155,7 +157,7 @@ public class TwitterInboundTransport extends HttpInboundTransport
     if (getProperty("follow").isValid())
     {
       String value = (String) getProperty("follow").getValue();
-      if (value.length() > 0)
+      if (Validator.notEmpty(value))
       {
         paramsStr.append("follow=" + value);
         String[] flwStrs = value.split(",");
@@ -222,7 +224,7 @@ public class TwitterInboundTransport extends HttpInboundTransport
       count = (Integer) prop;
       if (count < -150000 || count > 150000)
       {
-        logger.error("Count value should be within -150000 to 150000");
+        LOGGER.error( "INBOUND_COUNT_VALIDATION" );
       }
       else
       {
@@ -245,7 +247,7 @@ public class TwitterInboundTransport extends HttpInboundTransport
     if (consoleOut != null && "1".equals(consoleOut))
     {
       System.out.println(msg);
-      logger.debug(msg);
+      LOGGER.debug(msg);
     }
   }
 
@@ -255,7 +257,7 @@ public class TwitterInboundTransport extends HttpInboundTransport
     if (consoleOut != null && "1".equals(consoleOut))
     {
       System.out.print(msg);
-      logger.debug(msg);
+      LOGGER.debug(msg);
     }
   }
 }

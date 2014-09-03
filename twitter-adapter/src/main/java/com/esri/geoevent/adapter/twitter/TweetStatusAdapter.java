@@ -32,10 +32,11 @@ import java.nio.charset.CharsetDecoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.codehaus.jackson.map.ObjectMapper;
 
+import com.esri.core.geometry.MapGeometry;
+import com.esri.core.geometry.Point;
+import com.esri.core.geometry.SpatialReference;
 import com.esri.geoevent.adapter.twitter.Tweet.BoundingBox;
 import com.esri.geoevent.adapter.twitter.Tweet.Coordinates;
 import com.esri.geoevent.adapter.twitter.Tweet.Place;
@@ -46,21 +47,25 @@ import com.esri.ges.core.component.ComponentException;
 import com.esri.ges.core.geoevent.FieldGroup;
 import com.esri.ges.core.geoevent.GeoEvent;
 import com.esri.ges.core.geoevent.GeoEventDefinition;
+import com.esri.ges.framework.i18n.BundleLogger;
+import com.esri.ges.framework.i18n.BundleLoggerFactory;
 import com.esri.ges.messaging.MessagingException;
-import com.esri.ges.spatial.Point;
 
 public class TweetStatusAdapter extends InboundAdapterBase
 {
-  private static final Log LOG    = LogFactory.getLog(TweetStatusAdapter.class);
+  private static final BundleLogger LOGGER    = BundleLoggerFactory.getLogger(TweetStatusAdapter.class);
   private ObjectMapper     mapper = new ObjectMapper();
   private SimpleDateFormat sdf    = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy");
   private Charset          charset;
   private CharsetDecoder   decoder;
-
+  
+  //static vars
+  private static final String BUNDLE_NAME 					= "com.esri.geoevent.adapter.twitter-transport";
+  
   public TweetStatusAdapter(AdapterDefinition definition) throws ComponentException
   {
     super(definition);
-    LOG.debug("Tweet Status Adapter created");
+    LOGGER.debug( "CREATED_MSG" );
     charset = Charset.forName("UTF-8");
     decoder = charset.newDecoder();
   }
@@ -88,7 +93,7 @@ public class TweetStatusAdapter extends InboundAdapterBase
       if (jsonTweet == null)
       {
 
-        consoleDebugPrintLn("jsonTweet is null");
+        consoleDebugPrintLn( LOGGER.translate(BUNDLE_NAME, "JSON_IS_NULL") );
         return null;
       }
       // consoleDebugPrintLn(jsonTweet.getText());
@@ -107,16 +112,16 @@ public class TweetStatusAdapter extends InboundAdapterBase
           geoEventCreator.getGeoEventDefinitionManager().addGeoEventDefinition(geoDef);
         }
         msg = geoEventCreator.create(geoDef.getName(), geoDef.getOwner());
-        LOG.debug("Created new TweetStatusMessage");
+        LOGGER.debug( "NEW_MESSAGE_CREATED" );
       }
       catch (MessagingException e)
       {
-        LOG.error("Message Creation error in TweetStatusAdapter: " + e.getMessage());
+        LOGGER.error( "MESSAGE_CREATTION_ERROR1", e.getMessage() );
         return null;
       }
       catch (Exception ex)
       {
-        LOG.error("Error creating initial tweet message: " + ex.getMessage());
+        LOGGER.error( "MESSAGE_CREATTION_ERROR2", ex.getMessage() );
         return null;
       }
 
@@ -165,10 +170,12 @@ public class TweetStatusAdapter extends InboundAdapterBase
       // and set geolocated attribute to true or false
       if (!Double.isNaN(x) && !Double.isNaN(y))
       {
-        Point pt = spatial.createPoint(x, y, wkid);
-        msg.setField(5, pt);
+        Point pt = new Point(x, y);
+        MapGeometry geom = new MapGeometry(pt,SpatialReference.create(wkid));
+        msg.setField(5, geom);        
         msg.setField(15, true);
-        LOG.debug("Generated tweet with location");
+        
+        LOGGER.debug( "TWEET_WITH_LOC_SUCCESS" );
         // consoleDebugPrintLn("tweet with location");
       }
       else
@@ -187,8 +194,8 @@ public class TweetStatusAdapter extends InboundAdapterBase
       }
       catch (Exception e)
       {
-        LOG.warn("Parse date exception in TweetStatusAdapter (" + jsonTweet.getCreated_at() + "): " + e.getMessage());
-        LOG.debug(e.getMessage(), e);
+        LOGGER.warn( "DATE_EXCEPTION_ERROR", jsonTweet.getCreated_at(), e.getMessage() );
+        LOGGER.debug( e.getMessage(), e );
       }
       msg.setField(3, jsonTweet.getRetweeted());
       msg.setField(4, jsonTweet.getRetweet_count());
@@ -226,7 +233,7 @@ public class TweetStatusAdapter extends InboundAdapterBase
       }
       catch (Throwable t)
       {
-        LOG.error("Unexpected error", t);
+        LOGGER.error( "UNEXPECTED_ERROR", t);
       }
     }
 
@@ -244,12 +251,13 @@ public class TweetStatusAdapter extends InboundAdapterBase
       String text = charBuffer.toString();
       TweetEventBuilder builder = new TweetEventBuilder(text);
       Thread t = new Thread(builder);
-      t.setName("Twitter Event Builder " + System.identityHashCode(buffer));
+      //no need to translate thread names
+      t.setName( "Twitter Event Builder" +  System.identityHashCode(buffer) );
       t.start();
     }
     catch (CharacterCodingException e)
     {
-      LOG.warn("Could not decode the incoming buffer - " + e);
+      LOGGER.warn( "DECODE_ERROR", e );
       buffer.clear();
       return;
     }
@@ -267,7 +275,7 @@ public class TweetStatusAdapter extends InboundAdapterBase
     if (consoleOut != null && "1".equals(consoleOut))
     {
       System.out.println(msg);
-      LOG.debug(msg);
+      LOGGER.debug(msg);
     }
   }
 
@@ -277,7 +285,7 @@ public class TweetStatusAdapter extends InboundAdapterBase
     if (consoleOut != null && "1".equals(consoleOut))
     {
       System.out.print(msg);
-      LOG.debug(msg);
+      LOGGER.debug(msg);
     }
   }
 }
