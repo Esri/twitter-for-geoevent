@@ -20,7 +20,7 @@
   Redlands, California, USA 92373
 
   email: contracts@esri.com
-*/
+ */
 
 package com.esri.geoevent.transport.twitter;
 
@@ -38,115 +38,115 @@ import com.esri.ges.transport.http.HttpTransportContext;
 
 public class TwitterOutboundTransport extends HttpOutboundTransport
 {
-  static final private BundleLogger LOGGER = BundleLoggerFactory.getLogger(TwitterOutboundTransport.class);
+	private static final BundleLogger	LOGGER	= BundleLoggerFactory.getLogger(TwitterOutboundTransport.class);
 
-  private String           consumerKey;
-  private String           consumerSecret;
-  private String           accessToken;
-  private String           accessTokenSecret;
-  private String           postBodyOrg;
-  
-  public TwitterOutboundTransport(TransportDefinition definition) throws ComponentException
-  {
-    super(definition);
-  }
+	private String										consumerKey;
+	private String										consumerSecret;
+	private String										accessToken;
+	private String										accessTokenSecret;
+	private String										postBodyOrg;
 
-  @Override
-  public synchronized void start()
-  {
-    super.start();
-    LOGGER.debug( "OUTBOUND_START" );
-  }
+	public TwitterOutboundTransport(TransportDefinition definition) throws ComponentException
+	{
+		super(definition);
+	}
 
-  @Override
-  public synchronized void stop()
-  {
-    super.stop();
-    LOGGER.debug( "OUTBOUND_STOP" );
-  }
+	@Override
+	public synchronized void start()
+	{
+		super.start();
+		LOGGER.debug("OUTBOUND_START");
+	}
 
-  @Override
-  public synchronized void setup()
-  {
-    super.setup();
-    try
-    {
-      applyProperties();
-    }
-    catch (Exception e)
-    {
-      LOGGER.error(e.getMessage(), e);
-    }
-  }
+	@Override
+	public synchronized void stop()
+	{
+		super.stop();
+		LOGGER.debug("OUTBOUND_STOP");
+	}
 
-  @Override
-  public void receive(ByteBuffer bb, String channelId)
-  {
-    byte[] data = new byte[bb.remaining()];
-    bb.get(data);
+	@Override
+	public synchronized void setup()
+	{
+		super.setup();
+		try
+		{
+			applyProperties();
+		}
+		catch (Exception error)
+		{
+			LOGGER.error("OUTBOUND_TRANSPORT_SETUP_ERROR", error.getMessage());
+			LOGGER.info(error.getMessage(), error);
+		}
+	}
 
-    postBodyOrg = "status=" + new String(data);
-    postBody = OAuth.encodePostBody(postBodyOrg);
-    LOGGER.debug(postBody);
+	@Override
+	public void receive(ByteBuffer bb, String channelId)
+	{
+		byte[] data = new byte[bb.remaining()];
+		bb.get(data);
 
-    // super.receive(bb, channelId);
-    doHttp();
+		postBodyOrg = "status=" + new String(data);
+		postBody = OAuth.encodePostBody(postBodyOrg);
+		LOGGER.debug(postBody);
 
-  }
+		// super.receive(bb, channelId);
+		doHttp();
+	}
 
-  @Override
-  public void beforeConnect(TransportContext context)
-  {
-    // String url = "https://api.twitter.com/1.1/statuses/update.json";
-    HttpRequest request = ((HttpTransportContext) context).getHttpRequest();
+	@Override
+	public void beforeConnect(TransportContext context)
+	{
+		// String url = "https://api.twitter.com/1.1/statuses/update.json";
+		HttpRequest request = ((HttpTransportContext) context).getHttpRequest();
 
-    String authorizationHeader = OAuth.createOAuthAuthorizationHeader(clientUrl, httpMethod, postBodyOrg, accessToken, accessTokenSecret, consumerKey, consumerSecret);
+		String authorizationHeader = OAuth.createOAuthAuthorizationHeader(clientUrl, httpMethod, postBodyOrg, accessToken, accessTokenSecret, consumerKey, consumerSecret);
 
-    // log.debug(authorizationHeader);
-    request.addHeader(OAuth.AUTHORIZATION, authorizationHeader);
-    request.addHeader(OAuth.ACCEPT, OAuth.ACCEPT_VALUES);// "text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2"
-    request.setHeader(OAuth.CONTENT_TYPE, this.postBodyType);// "application/x-www-form-urlencoded"
-  }
+		// log.debug(authorizationHeader);
+		request.addHeader(OAuth.AUTHORIZATION, authorizationHeader);
+		request.addHeader(OAuth.ACCEPT, OAuth.ACCEPT_VALUES);// "text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2"
+		request.setHeader(OAuth.CONTENT_TYPE, this.postBodyType);// "application/x-www-form-urlencoded"
+	}
 
-  @Override
-  public void validate()
-  {
-    LOGGER.debug("Outbound Skip validation...");
-  }
+	@Override
+	public void validate()
+	{
+		LOGGER.debug("OUTBOUND_SKIP_VALIDATION");
+	}
 
-  public void applyProperties() throws Exception
-  {
-    if (getProperty(OAuth.CONSUMER_KEY).isValid())
-    {
-      String value = (String) getProperty(OAuth.CONSUMER_KEY).getValue();
-      if (value.length() > 0)
-      {
-        consumerKey = cryptoService.decrypt(value);
-      }
-    }
-    if (getProperty(OAuth.CONSUMER_SECRET).isValid())
-    {
-      String value = (String) getProperty(OAuth.CONSUMER_SECRET).getValue();
-      if (value.length() > 0)
-      {
-        consumerSecret = cryptoService.decrypt(value);
-      }
-    }
-    if (getProperty(OAuth.ACCESS_TOKEN).isValid())
-    {
-      String value = (String) getProperty(OAuth.ACCESS_TOKEN).getValue();
-      if (value.length() > 0)
-      {
-        accessToken = cryptoService.decrypt(value);
-      }
-    }
-    if (getProperty(OAuth.ACCESS_TOKEN_SECRET).isValid())
-    {
-      String value = (String) getProperty(OAuth.ACCESS_TOKEN_SECRET).getValue();
-      if (value.length() > 0)
-      {
-        accessTokenSecret = cryptoService.decrypt(value);
-      }
-    }
-  }
+	public void applyProperties() throws Exception
+	{
+		if (getProperty(OAuth.CONSUMER_KEY).isValid())
+		{
+			String value = (String) getProperty(OAuth.CONSUMER_KEY).getValue();
+			if (value.length() > 0)
+			{
+				consumerKey = cryptoService.decrypt(value);
+			}
+		}
+		if (getProperty(OAuth.CONSUMER_SECRET).isValid())
+		{
+			String value = (String) getProperty(OAuth.CONSUMER_SECRET).getValue();
+			if (value.length() > 0)
+			{
+				consumerSecret = cryptoService.decrypt(value);
+			}
+		}
+		if (getProperty(OAuth.ACCESS_TOKEN).isValid())
+		{
+			String value = (String) getProperty(OAuth.ACCESS_TOKEN).getValue();
+			if (value.length() > 0)
+			{
+				accessToken = cryptoService.decrypt(value);
+			}
+		}
+		if (getProperty(OAuth.ACCESS_TOKEN_SECRET).isValid())
+		{
+			String value = (String) getProperty(OAuth.ACCESS_TOKEN_SECRET).getValue();
+			if (value.length() > 0)
+			{
+				accessTokenSecret = cryptoService.decrypt(value);
+			}
+		}
+	}
 }
