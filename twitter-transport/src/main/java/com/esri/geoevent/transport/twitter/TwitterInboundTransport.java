@@ -80,7 +80,7 @@ public class TwitterInboundTransport extends HttpInboundTransport
 			postBodyOrg = postBody;
 			postBody = OAuth.encodePostBody(postBodyOrg);
 			LOGGER.debug(postBody);
-      consoleDebugPrintLn(postBody);
+			consoleDebugPrintLn(postBody);
 		}
 		catch (Exception error)
 		{
@@ -127,6 +127,7 @@ public class TwitterInboundTransport extends HttpInboundTransport
 				consumerKey = cryptoService.decrypt(value);
 			}
 		}
+			
 		if (getProperty(OAuth.CONSUMER_SECRET).isValid())
 		{
 			String value = (String) getProperty(OAuth.CONSUMER_SECRET).getValue();
@@ -135,6 +136,7 @@ public class TwitterInboundTransport extends HttpInboundTransport
 				consumerSecret = cryptoService.decrypt(value);
 			}
 		}
+		
 		if (getProperty(OAuth.ACCESS_TOKEN).isValid())
 		{
 			String value = (String) getProperty(OAuth.ACCESS_TOKEN).getValue();
@@ -143,6 +145,7 @@ public class TwitterInboundTransport extends HttpInboundTransport
 				accessToken = cryptoService.decrypt(value);
 			}
 		}
+		
 		if (getProperty(OAuth.ACCESS_TOKEN_SECRET).isValid())
 		{
 			String value = (String) getProperty(OAuth.ACCESS_TOKEN_SECRET).getValue();
