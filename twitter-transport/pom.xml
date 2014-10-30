@@ -43,7 +43,6 @@
 						<Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
 						<Bundle-ContactAddress>${contact.address}</Bundle-ContactAddress>
 						<Bundle-Version>${project.version}</Bundle-Version>
-						<AGES-Domain>com.esri.geoevent.transport</AGES-Domain>
 						<Export-Package />
 						<Private-Package>com.esri.geoevent.transport.twitter</Private-Package>
 					</instructions>

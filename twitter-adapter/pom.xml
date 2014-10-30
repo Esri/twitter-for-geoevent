@@ -32,7 +32,6 @@
 						<Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
 						<Bundle-ContactAddress>${contact.address}</Bundle-ContactAddress>
 						<Bundle-Version>${project.version}</Bundle-Version>
-						<AGES-Domain>com.esri.geoevent.adapter</AGES-Domain>
 						<Export-Package />
 						<Private-Package>com.esri.geoevent.adapter.twitter</Private-Package>
 					</instructions>

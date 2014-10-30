@@ -37,6 +37,7 @@
 			<groupId>com.esri</groupId>
 			<artifactId>geoevent-sdk</artifactId>
 			<version>10.3.0</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
