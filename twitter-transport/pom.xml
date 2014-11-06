@@ -11,14 +11,8 @@
 	<artifactId>twitter-transport</artifactId>
 	<name>Esri :: GeoEvent :: Transport :: Twitter</name>
 	<packaging>bundle</packaging>
+	
 	<dependencies>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>[1.2.9,)</version>
-			<scope>provided</scope>
-			<optional>true</optional>
-		</dependency>
 		<dependency>
 			<groupId>com.esri.geoevent.transport</groupId>
 			<artifactId>http-transport</artifactId>
@@ -29,9 +23,10 @@
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
-			<version>4.2</version>
+			<version>4.3.1</version>
 		</dependency>
 	</dependencies>
+	
 	<build>
 		<plugins>
 			<plugin>
