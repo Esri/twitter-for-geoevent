@@ -24,7 +24,7 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.esri</groupId>
+			<groupId>com.esri.geoevent.sdk</groupId>
 			<artifactId>geoevent-sdk</artifactId>
 			<version>10.3.0</version>
 			<scope>provided</scope>
