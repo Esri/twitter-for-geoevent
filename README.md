@@ -1,6 +1,6 @@
 # twitter-for-geoevent
 
-ArcGIS 10.3.x GeoEvent Extension Sample Twitter Inbound and Outbound Connectors for sending and receiving tweets.
+ArcGIS 10.3 GeoEvent Extension for Server sample Twitter Input and Output Connectors for sending and receiving tweets.
 
 ![App](twitter-for-geoevent.png?raw=true)
 
@@ -30,7 +30,7 @@ Installing the built jar files:
 ## Resources
 
 * [Download the connector's tutorial](http://www.arcgis.com/home/item.html?id=041138094e5348eb902f4b71175eeb6f) from the ArcGIS GeoEvent Extension Gallery
-* [ArcGIS GeoEvent Extension for Server Resource Center](http://links.esri.com/geoevent)
+* [ArcGIS GeoEvent Extension for Server Resources](http://links.esri.com/geoevent)
 * [ArcGIS Blog](http://blogs.esri.com/esri/arcgis/)
 * [twitter@esri](http://twitter.com/esri)
 
