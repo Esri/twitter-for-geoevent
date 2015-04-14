@@ -25,6 +25,10 @@
 package com.esri.geoevent.transport.twitter;
 
 import java.nio.ByteBuffer;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetDecoder;
+import java.nio.charset.CodingErrorAction;
+import java.nio.charset.StandardCharsets;
 
 import org.apache.http.HttpRequest;
 
@@ -45,10 +49,12 @@ public class TwitterOutboundTransport extends HttpOutboundTransport
 	private String										accessToken;
 	private String										accessTokenSecret;
 	private String										postBodyOrg;
-
+	private CharsetDecoder 						decoder;
+	
 	public TwitterOutboundTransport(TransportDefinition definition) throws ComponentException
 	{
 		super(definition);
+		decoder = createCharsetDecoder();
 	}
 
 	@Override
@@ -83,15 +89,17 @@ public class TwitterOutboundTransport extends HttpOutboundTransport
 	@Override
 	public void receive(ByteBuffer bb, String channelId)
 	{
-		byte[] data = new byte[bb.remaining()];
-		bb.get(data);
-
-		postBodyOrg = "status=" + new String(data);
-		postBody = OAuth.encodePostBody(postBodyOrg);
-		LOGGER.debug(postBody);
-
-		// super.receive(bb, channelId);
-		doHttp();
+		try
+		{
+			postBodyOrg = "status=" + decoder.decode(bb).toString();
+			postBody = OAuth.encodePostBody(postBodyOrg);
+			LOGGER.debug(postBody);
+			doHttp();
+		}
+		catch(Exception e)
+		{
+			LOGGER.error("ERROR_SENDING_MSG", e);
+		}
 	}
 
 	@Override
@@ -149,4 +157,12 @@ public class TwitterOutboundTransport extends HttpOutboundTransport
 			}
 		}
 	}
+	
+	private CharsetDecoder createCharsetDecoder()
+  {
+    Charset charset = StandardCharsets.UTF_8;
+    CharsetDecoder decoder = charset.newDecoder();
+    decoder.onUnmappableCharacter(CodingErrorAction.IGNORE);
+    return decoder;
+  }
 }
