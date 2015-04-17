@@ -17,20 +17,6 @@
 			<property name="count" label="${com.esri.geoevent.adapter.twitter-adapter.INPUT_CONNNECTOR_COUNT_LBL}" default="0" source="transport" />
 		</advanced>
 		<hidden>
-			<property label="${com.esri.geoevent.adapter.twitter-adapter.INPUT_CONNNECTOR_MODE_LBL}" name="mode" default="CLIENT" source="transport" />
-			<property label="${com.esri.geoevent.adapter.twitter-adapter.INPUT_CONNNECTOR_USE_LONG_POLLING_LBL}" name="useLongPolling" default="true" source="transport" />
-			<property label="${com.esri.geoevent.adapter.twitter-adapter.INPUT_CONNNECTOR_HONOR_LAST_MOD_LBL}" name="honorLastModified" default="true" source="transport" />
-			<property label="${com.esri.geoevent.adapter.twitter-adapter.INPUT_CONNNECTOR_FREQUENCY_LBL}" name="frequency" default="5" source="transport" />
-			<property label="${com.esri.geoevent.adapter.twitter-adapter.INPUT_CONNNECTOR_POST_BODY_TYPE_LBL}" name="postContentType" default="application/x-www-form-urlencoded" source="transport" />
-			<property label="${com.esri.geoevent.adapter.twitter-adapter.INPUT_CONNNECTOR_MIME_TYPE_CLIENT_LBL}" name="acceptableMimeTypesClientMode" default="application/x-www-form-urlencoded" source="transport" />
-			<property label="${com.esri.geoevent.adapter.twitter-adapter.INPUT_CONNNECTOR_HTTP_METHOD_LBL}" name="httpMethod" default="POST" source="transport" />
-			<property label="${com.esri.geoevent.adapter.twitter-adapter.INPUT_CONNNECTOR_CLIENT_POST_BODY_LBL}" name="clientPostBody" source="transport" />
-			<property label="${com.esri.geoevent.adapter.twitter-adapter.INPUT_CONNNECTOR_CLIENT_PARAMS_LBL}" name="clientParameters" source="transport" />
-			<property label="${com.esri.geoevent.adapter.twitter-adapter.INPUT_CONNNECTOR_CLIENT_PROXY_URL_LBL}" name="clientURLProxy" source="transport" />
-			<property label="${com.esri.geoevent.adapter.twitter-adapter.INPUT_CONNNECTOR_USE_CLIENT_PROXY_LBL}" name="useClientURLProxy" default="false" source="transport" />
-			<property label="${com.esri.geoevent.adapter.twitter-adapter.INPUT_CONNNECTOR_MIME_TYPE_SERVER_LBL}" name="acceptableMimeTypesServerMode" source="transport" />
-			<property label="${com.esri.geoevent.adapter.twitter-adapter.INPUT_CONNNECTOR_CLIENT_URL_LBL}" name="clientURL" default="https://stream.twitter.com/1.1/statuses/filter.json"
-				source="transport" />
 		</hidden>
 	</properties>
 </connectorDefinition>

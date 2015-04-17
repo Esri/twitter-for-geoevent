@@ -24,97 +24,94 @@
 
 package com.esri.geoevent.transport.twitter;
 
+import java.nio.BufferOverflowException;
+import java.nio.ByteBuffer;
+
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.HttpRequest;
+
+import twitter4j.FilterQuery;
+import twitter4j.RawStreamListener;
+import twitter4j.TwitterStream;
+import twitter4j.TwitterStreamFactory;
+import twitter4j.conf.ConfigurationBuilder;
 
 import com.esri.ges.core.component.ComponentException;
+import com.esri.ges.core.component.RunningState;
 import com.esri.ges.framework.i18n.BundleLogger;
 import com.esri.ges.framework.i18n.BundleLoggerFactory;
-import com.esri.ges.transport.TransportContext;
+import com.esri.ges.transport.InboundTransportBase;
 import com.esri.ges.transport.TransportDefinition;
-import com.esri.ges.transport.http.HttpInboundTransport;
-import com.esri.ges.transport.http.HttpTransportContext;
+import com.esri.ges.util.Validator;
 
-public class TwitterInboundTransport extends HttpInboundTransport
+public class TwitterInboundTransport extends InboundTransportBase implements Runnable
 {
-	static final private BundleLogger	LOGGER		= BundleLoggerFactory.getLogger(TwitterInboundTransport.class);
-
-	private String										consumerKey;
-	private String										consumerSecret;
-	private String										accessToken;
-	private String										accessTokenSecret;
-	private String										postBodyOrg;
-
-	private long[]										follows		= null;
-	private String[]									tracks		= null;
-	private double[][]								locations	= null;
-	private int												count			= -1;
-
 	public TwitterInboundTransport(TransportDefinition definition) throws ComponentException
 	{
 		super(definition);
 	}
 
+	static final private BundleLogger	LOGGER			= BundleLoggerFactory.getLogger(TwitterInboundTransport.class);
+
+	private String										consumerKey;
+	private String										consumerSecret;
+	private String										accessToken;
+	private String										accessTokenSecret;
+
+	private long[]										follows			= null;
+	private String[]									tracks			= null;
+	private double[][]								locations		= null;
+	private int												count				= -1;
+
+	private String										filterString;
+	private TwitterStream							twitterStream;
+	private Thread										thread			= null;
+
 	@Override
 	public synchronized void start()
 	{
-		super.start();
-		LOGGER.debug("INBOUND_START");
+		try
+		{
+			switch (getRunningState())
+			{
+				case STARTING:
+				case STARTED:
+				case STOPPING:
+					return;
+			}
+			setRunningState(RunningState.STARTING);
+			thread = new Thread(this);
+			thread.start();
+		}
+		catch (Exception e)
+		{
+			LOGGER.error("UNEXPECTED_ERROR_STARTING", e);
+			stop();
+		}
 	}
 
 	@Override
 	public synchronized void stop()
 	{
-		super.stop();
-		LOGGER.debug("INBOUND_STOP");
-	}
-
-	@Override
-	public synchronized void setup()
-	{
-		super.setup();
 		try
 		{
-			applyProperties();
-			// encode the postBody
-			postBodyOrg = postBody;
-			postBody = OAuth.encodePostBody(postBodyOrg);
-			LOGGER.debug(postBody);
-			consoleDebugPrintLn(postBody);
+			if (this.twitterStream != null)
+			{
+				twitterStream.cleanUp();
+				twitterStream.shutdown();
+			}
 		}
-		catch (Exception error)
+		catch (Exception ex)
 		{
-			LOGGER.error("INBOUND_TRANSPORT_SETUP_ERROR", error.getMessage());
-			LOGGER.info(error.getMessage(), error);
+			LOGGER.error("UNABLE_TO_CLOSE", ex);
 		}
+		setRunningState(RunningState.STOPPED);
+		LOGGER.debug("INBOUND_STOP");
 	}
-
-	@Override
-	public void beforeConnect(TransportContext context)
-	{
-		// String url = "https://stream.twitter.com/1/statuses/filter.json";
-
-		HttpRequest request = ((HttpTransportContext) context).getHttpRequest();
-
-		String authorizationHeader = OAuth.createOAuthAuthorizationHeader(clientUrl, httpMethod, postBodyOrg, accessToken, accessTokenSecret, consumerKey, consumerSecret);
-
-		// logger.debug(authorizationHeader);
-		request.addHeader(OAuth.AUTHORIZATION, authorizationHeader);
-		request.addHeader(OAuth.ACCEPT, OAuth.ACCEPT_VALUES);// "text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2"
-		request.setHeader(OAuth.CONTENT_TYPE, this.postBodyType);// "application/x-www-form-urlencoded"
-	}
-
+	
 	@Override
 	public void validate()
 	{
 		LOGGER.debug("INBOUND_SKIP_VALIDATION");
-	}
-
-	@Override
-	public void onReceive(TransportContext context)
-	{
-		super.onReceive(context);
-		consoleDebugPrintLn("INBOUND_ON_RECEIVE");
 	}
 
 	public void applyProperties() throws Exception
@@ -127,7 +124,7 @@ public class TwitterInboundTransport extends HttpInboundTransport
 				consumerKey = cryptoService.decrypt(value);
 			}
 		}
-			
+
 		if (getProperty(OAuth.CONSUMER_SECRET).isValid())
 		{
 			String value = (String) getProperty(OAuth.CONSUMER_SECRET).getValue();
@@ -136,7 +133,7 @@ public class TwitterInboundTransport extends HttpInboundTransport
 				consumerSecret = cryptoService.decrypt(value);
 			}
 		}
-		
+
 		if (getProperty(OAuth.ACCESS_TOKEN).isValid())
 		{
 			String value = (String) getProperty(OAuth.ACCESS_TOKEN).getValue();
@@ -145,7 +142,7 @@ public class TwitterInboundTransport extends HttpInboundTransport
 				accessToken = cryptoService.decrypt(value);
 			}
 		}
-		
+
 		if (getProperty(OAuth.ACCESS_TOKEN_SECRET).isValid())
 		{
 			String value = (String) getProperty(OAuth.ACCESS_TOKEN_SECRET).getValue();
@@ -207,13 +204,13 @@ public class TwitterInboundTransport extends HttpInboundTransport
 				// lengh should be multiple of 4
 				if (length % 4 == 0)
 				{
-					int dimension = length / 4;
-					locations = new double[dimension][4];
+					int dimension = length / 2;
+					locations = new double[dimension][2];
 					for (int i = 0; i < dimension; i++)
 					{
-						for (int j = 0; j < 4; j++)
+						for (int j = 0; j < 2; j++)
 						{
-							locations[i][j] = Double.parseDouble(crdStrs[i + j].trim());
+							locations[i][j] = Double.parseDouble(crdStrs[i*2 + j].trim());
 						}
 					}
 				}
@@ -239,28 +236,102 @@ public class TwitterInboundTransport extends HttpInboundTransport
 		}
 		if (paramsStr.length() > 0)
 		{
-			postBody = paramsStr.toString();
+			filterString = paramsStr.toString();
 		}
 	}
 
-	public static void consoleDebugPrintLn(String msg)
+	@Override
+	public void run()
 	{
-		String consoleOut = System.getenv("GEP_CONSOLE_OUTPUT");
-		if (consoleOut != null && "1".equals(consoleOut))
-		{
-			System.out.println(msg);
-			LOGGER.debug(msg);
-		}
+		receiveData();
+
 	}
 
-	public static void consoleDebugPrint(String msg)
+	private void receiveData()
 	{
-		String consoleOut = System.getenv("GEP_CONSOLE_OUTPUT");
-		if (consoleOut != null && "1".equals(consoleOut))
+		try
 		{
-			System.out.print(msg);
-			LOGGER.debug(msg);
+			applyProperties();
+			setRunningState(RunningState.STARTED);
+
+			ConfigurationBuilder cb = new ConfigurationBuilder();
+			cb.setDebugEnabled(true);
+			cb.setOAuthConsumerKey(consumerKey);
+			cb.setOAuthConsumerSecret(consumerSecret);
+			cb.setOAuthAccessToken(accessToken);
+			cb.setOAuthAccessTokenSecret(accessTokenSecret);
+			twitterStream = new TwitterStreamFactory(cb.build()).getInstance();
+			
+			RawStreamListener rl = new RawStreamListener()
+				{
+					
+					@Override
+					public void onException(Exception ex)
+					{
+						LOGGER.error("INBOUND_TRANSPORT_RAW_STREAM_LISTERNER_EXCEPTION", ex.getMessage());
+					}
+					
+					@Override
+					public void onMessage(String rawString)
+					{
+						receive(rawString);
+					}
+				};
+
+			FilterQuery fq = new FilterQuery();
+
+			String keywords[] = tracks;
+
+			if(follows != null && follows.length>0)
+				fq.follow(follows);
+			else if(keywords != null && keywords.length>0)
+				fq.track(keywords);
+			else if(locations != null)
+				fq.locations(locations);
+			else
+				throw new Exception("INBOUND_TRANSPORT_NOFILTER_ERROR");
+			
+			fq.count(count);
+			
+			LOGGER.info("INBOUND_TRANSPORT_FILTER", filterString);
+			
+			twitterStream.addListener(rl);
+			twitterStream.filter(fq);
+
+		}
+		catch (Throwable ex)
+		{
+			LOGGER.error("UNEXPECTED_ERROR", ex);
+			setRunningState(RunningState.ERROR);
 		}
 	}
 
+	private void receive(String tweet)
+	{
+		if (!Validator.isEmpty(tweet))
+		{
+			byte[] newBytes = tweet.getBytes();
+
+			ByteBuffer bb = ByteBuffer.allocate(newBytes.length);
+			try
+			{
+				bb.put(newBytes);
+				bb.flip();
+				byteListener.receive(bb, "");
+				bb.clear();
+			}
+			catch (BufferOverflowException boe)
+			{
+				LOGGER.error("BUFFER_OVERFLOW_ERROR", boe);
+				bb.clear();
+				setRunningState(RunningState.ERROR);
+			}
+			catch (Exception e)
+			{
+				LOGGER.error("UNEXPECTED_ERROR2", e);
+				stop();
+				setRunningState(RunningState.ERROR);
+			}
+		}
+	}
 }

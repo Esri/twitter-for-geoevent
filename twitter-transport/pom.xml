@@ -11,7 +11,7 @@
 	<artifactId>twitter-transport</artifactId>
 	<name>Esri :: GeoEvent :: Transport :: Twitter</name>
 	<packaging>bundle</packaging>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>com.esri.geoevent.transport</groupId>
@@ -20,13 +20,29 @@
 			<scope>system</scope>
 			<systemPath>${project.basedir}/lib/http-transport-10.3.0.jar</systemPath>
 		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.apache.httpcomponents</groupId> -->
+<!-- 			<artifactId>httpclient</artifactId> -->
+<!-- 			<version>4.3.1</version> -->
+<!-- 		</dependency> -->
 		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-			<version>4.3.1</version>
+			<groupId>org.twitter4j</groupId>
+			<artifactId>twitter4j-core</artifactId>
+			<version>4.0.3</version>
 		</dependency>
+		<dependency>
+			<groupId>org.twitter4j</groupId>
+			<artifactId>twitter4j-stream</artifactId>
+			<version>4.0.3</version>
+		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.twitter4j</groupId> -->
+<!-- 			<artifactId>twitter4j-async</artifactId> -->
+<!-- 			<version>4.0.3</version> -->
+<!-- 		</dependency> -->
+
 	</dependencies>
-	
+
 	<build>
 		<plugins>
 			<plugin>
@@ -40,6 +56,10 @@
 						<Bundle-Version>${project.version}</Bundle-Version>
 						<Export-Package />
 						<Private-Package>com.esri.geoevent.transport.twitter</Private-Package>
+						<Embed-Dependency>
+							*;scope=compile|runtime;inline=true
+						</Embed-Dependency>
+						<Embed-Transitive>true</Embed-Transitive>
 					</instructions>
 				</configuration>
 			</plugin>
