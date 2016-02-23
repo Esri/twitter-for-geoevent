@@ -1,6 +1,6 @@
 # twitter-for-geoevent
 
-ArcGIS 10.3 GeoEvent Extension for Server sample Twitter Input and Output Connectors for sending and receiving tweets.
+ArcGIS 10.4 GeoEvent Extension for Server sample Twitter Input and Output Connectors for sending and receiving tweets.
 
 ![App](twitter-for-geoevent.png?raw=true)
 
