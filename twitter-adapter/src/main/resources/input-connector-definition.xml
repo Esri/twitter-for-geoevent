@@ -1,8 +1,8 @@
 <connectorDefinition label="${com.esri.geoevent.adapter.twitter-adapter.INPUT_CONNNECTOR_LABEL}" name="twitter-in" type="inbound">
 	<description>${com.esri.geoevent.adapter.twitter-adapter.INPUT_CONNNECTOR_DESC}</description>
 	<defaultName>twitter-in</defaultName>
-	<transport uri="com.esri.geoevent.transport.inbound/Twitter/10.3.0" />
-	<adapter uri="com.esri.geoevent.adapter.inbound/Twitter/10.3.0" />
+	<transport uri="com.esri.geoevent.transport.inbound/Twitter/10.4.0" />
+	<adapter uri="com.esri.geoevent.adapter.inbound/Twitter/10.4.0" />
 	<properties>
 		<shown>
 			<property name="consumerKey" label="${com.esri.geoevent.adapter.twitter-adapter.INPUT_CONNNECTOR_CONSUMER_KEY_LBL}" source="transport" />

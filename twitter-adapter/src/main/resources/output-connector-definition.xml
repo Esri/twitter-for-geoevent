@@ -1,7 +1,7 @@
 <connectorDefinition label="${com.esri.geoevent.adapter.twitter-adapter.OUTPUT_CONNNECTOR_LABEL}" name="twitter-out" type="outbound">
 	<description>${com.esri.geoevent.adapter.twitter-adapter.OUTPUT_CONNNECTOR_DESC}</description>
-	<adapter uri="com.esri.ges.adapter.outbound/MessageFormatter/10.3.0" />
-	<transport uri="com.esri.geoevent.transport.outbound/Twitter/10.3.0" />
+	<adapter uri="com.esri.ges.adapter.outbound/MessageFormatter/10.4.0" />
+	<transport uri="com.esri.geoevent.transport.outbound/Twitter/10.4.0" />
 	<defaultName>twitter-out</defaultName>
 	<properties>
 		<shown>
