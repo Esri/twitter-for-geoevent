@@ -94,7 +94,7 @@ public class TwitterOutboundTransport extends HttpOutboundTransport
 			postBodyOrg = "status=" + decoder.decode(bb).toString();
 			postBody = OAuth.encodePostBody(postBodyOrg);
 			LOGGER.debug(postBody);
-			doHttp();
+			doHttp(clientUrl);
 		}
 		catch(Exception e)
 		{
