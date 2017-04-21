@@ -31,7 +31,7 @@ import java.nio.charset.CodingErrorAction;
 import java.nio.charset.StandardCharsets;
 
 import org.apache.http.HttpRequest;
-
+import com.esri.ges.core.geoevent.GeoEvent;
 import com.esri.ges.core.component.ComponentException;
 import com.esri.ges.framework.i18n.BundleLogger;
 import com.esri.ges.framework.i18n.BundleLoggerFactory;
@@ -84,6 +84,12 @@ public class TwitterOutboundTransport extends HttpOutboundTransport
 			LOGGER.error("OUTBOUND_TRANSPORT_SETUP_ERROR", error.getMessage());
 			LOGGER.info(error.getMessage(), error);
 		}
+	}
+
+	@Override
+	public void receive(ByteBuffer bb, String channelId, GeoEvent geoEvent)
+	{
+		receive(bb, channelId);
 	}
 
 	@Override
