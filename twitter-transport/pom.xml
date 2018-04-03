@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.esri.geoevent.parent</groupId>
 		<artifactId>twitter</artifactId>
-		<version>10.5.0</version>
+		<version>${project.version}</version>
 	</parent>
 	<groupId>com.esri.geoevent.transport</groupId>
 	<artifactId>twitter-transport</artifactId>
@@ -16,9 +16,9 @@
 		<dependency>
 			<groupId>com.esri.geoevent.transport</groupId>
 			<artifactId>http-transport</artifactId>
-			<version>10.5.0</version>
+			<version>${project.version}</version>
 			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/http-transport-10.5.0.jar</systemPath>
+			<systemPath>${project.basedir}/lib/http-transport-${project.version}.jar</systemPath>
 		</dependency>
 <!-- 		<dependency> -->
 <!-- 			<groupId>org.apache.httpcomponents</groupId> -->

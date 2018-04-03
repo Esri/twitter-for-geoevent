@@ -26,7 +26,8 @@ package com.esri.geoevent.adapter.twitter;
 
 import java.util.ArrayList;
 
-import org.codehaus.jackson.annotate.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 public class Tweet {
 
@@ -50,7 +51,7 @@ public class Tweet {
 			_type = s;
 		}
 
-		@JsonAnySetter
+		@JsonSetter
 		public void handleUnknown(String key, Object value) {
 			// System.out.println("Unknown key found in coordinates: " + key);
 		}
@@ -77,7 +78,7 @@ public class Tweet {
 			this._type = _type;
 		}
 
-		@JsonAnySetter
+		@JsonSetter
 		public void handleUnknown(String key, Object value) {
 			// System.out.println("Unknown key found in BoundingBox: " + key);
 		}

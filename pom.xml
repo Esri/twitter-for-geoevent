@@ -4,7 +4,7 @@
 
 	<groupId>com.esri.geoevent.parent</groupId>
 	<artifactId>twitter</artifactId>
-	<version>10.5.0</version>
+	<version>10.6.0</version>
 	<packaging>pom</packaging>
 
 	<name>Esri :: GeoEvent :: Twitter</name>
@@ -51,8 +51,8 @@
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>2.5.1</version>
 					<configuration>
-						<source>1.7</source>
-						<target>1.7</target>
+						<source>1.8</source>
+						<target>1.8</target>
 					</configuration>
 				</plugin>
 			</plugins>

@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.esri.geoevent.parent</groupId>
 		<artifactId>twitter</artifactId>
-		<version>10.5.0</version>
+		<version>${project.version}</version>
 	</parent>
 	<groupId>com.esri.geoevent.adapter</groupId>
 	<artifactId>twitter-adapter</artifactId>

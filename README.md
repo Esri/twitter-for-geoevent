@@ -24,7 +24,7 @@ Installing the built jar files:
 
 * ArcGIS GeoEvent Server.
 * ArcGIS GeoEvent Server SDK.
-* Java JDK 1.7 or greater.
+* Java JDK 1.8 or greater.
 * Maven.
 
 ## Resources

@@ -32,7 +32,7 @@ import java.nio.charset.CharsetDecoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-import org.codehaus.jackson.map.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.esri.core.geometry.MapGeometry;
 import com.esri.core.geometry.Point;
