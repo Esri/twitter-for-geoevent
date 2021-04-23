@@ -6,16 +6,20 @@
 
   <groupId>com.esri.geoevent.parent</groupId>
   <artifactId>twitter</artifactId>
-  <version>10.6.0</version>
+  <version>${revision}</version>
   <packaging>pom</packaging>
 
   <name>Esri :: GeoEvent :: Twitter</name>
   <url>http://www.esri.com</url>
 
   <properties>
+    <revision>10.6.0</revision>
+    <release>9</release>
     <contact.address>geoevent@esri.com</contact.address>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.build.propertiesEncoding>ISO-8859-1</project.build.propertiesEncoding>
     <maven.bundle.plugin.version>2.3.6</maven.bundle.plugin.version>
+    <maven.resources.plugin.version>3.2.0</maven.resources.plugin.version>
     <junit.version>4.8.1</junit.version>
   </properties>
 
@@ -40,8 +44,22 @@
   </dependencies>
 
   <build>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
     <pluginManagement>
       <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>${maven.resources.plugin.version}</version>
+          <configuration>
+            <propertiesEncoding>${project.build.propertiesEncoding}</propertiesEncoding>
+          </configuration>
+        </plugin>
         <plugin>
           <groupId>org.apache.felix</groupId>
           <artifactId>maven-bundle-plugin</artifactId>

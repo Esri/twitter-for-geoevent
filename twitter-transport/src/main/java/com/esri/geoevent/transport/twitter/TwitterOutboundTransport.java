@@ -96,11 +96,13 @@ public class TwitterOutboundTransport extends HttpOutboundTransport
   @Override
   public void receive(ByteBuffer bb, String channelId)
   {
+    LOGGER.trace("Sending event on channel: {0}", channelId);
     try
     {
       postBodyOrg = "status=" + decoder.decode(bb).toString();
+      LOGGER.trace("Post Body: {0}", postBodyOrg);
       postBody = OAuth.encodePostBody(postBodyOrg);
-      LOGGER.debug(postBody);
+
       doHttp(clientUrl);
     }
     catch (Exception e)
@@ -116,8 +118,8 @@ public class TwitterOutboundTransport extends HttpOutboundTransport
     HttpRequest request = ((HttpTransportContext) context).getHttpRequest();
 
     String authorizationHeader = OAuth.createOAuthAuthorizationHeader(clientUrl, httpMethod, postBodyOrg, accessToken, accessTokenSecret, consumerKey, consumerSecret);
-
-    // log.debug(authorizationHeader);
+    // LOGGER.trace("OAuth Header: {0}", authorizationHeader);
+    
     request.addHeader(OAuth.AUTHORIZATION, authorizationHeader);
     request.addHeader(OAuth.ACCEPT, OAuth.ACCEPT_VALUES);// "text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2"
     request.setHeader(OAuth.CONTENT_TYPE, this.postBodyType);// "application/x-www-form-urlencoded"
