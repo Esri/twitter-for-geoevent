@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <transport name="Twitter" domain="com.esri.geoevent.transport.inbound"
   type="inbound">
-  <description>${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_DESC}
+  <description>
+    Release ${release}:
+    ${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_DESC}
   </description>
   <propertyDefinitions>
     <propertyDefinition propertyName="consumerKey"

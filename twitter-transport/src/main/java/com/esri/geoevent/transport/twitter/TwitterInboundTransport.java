@@ -26,17 +26,20 @@ package com.esri.geoevent.transport.twitter;
 
 import java.nio.BufferOverflowException;
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
 
 import org.apache.commons.lang3.StringUtils;
 
 import com.esri.ges.core.component.ComponentException;
 import com.esri.ges.core.component.RunningState;
+import com.esri.ges.core.validation.ValidationException;
 import com.esri.ges.framework.i18n.BundleLogger;
 import com.esri.ges.framework.i18n.BundleLoggerFactory;
 import com.esri.ges.transport.InboundTransportBase;
 import com.esri.ges.transport.TransportDefinition;
 import com.esri.ges.util.Validator;
 
+import twitter4j.ConnectionLifeCycleListener;
 import twitter4j.FilterQuery;
 import twitter4j.RawStreamListener;
 import twitter4j.TwitterStream;
@@ -66,6 +69,9 @@ public class TwitterInboundTransport extends InboundTransportBase implements Run
   private TwitterStream             twitterStream;
   private Thread                    thread    = null;
 
+  private final TwitterConnectionLifeCycleListener connectionListener = new TwitterConnectionLifeCycleListener();
+
+  @SuppressWarnings("incomplete-switch")
   @Override
   public synchronized void start()
   {
@@ -109,63 +115,126 @@ public class TwitterInboundTransport extends InboundTransportBase implements Run
   }
 
   @Override
-  public void validate()
+  public void validate() throws ValidationException
   {
-    LOGGER.debug("INBOUND_SKIP_VALIDATION");
+    try
+    {
+      applyProperties();
+    }
+    catch (Exception e)
+    {
+      ValidationException validex = new ValidationException(e.getLocalizedMessage());
+      validex.addSuppressed(e);
+      throw validex;
+    }
+    // LOGGER.debug("INBOUND_SKIP_VALIDATION");
+    String keywords[] = tracks;
+    if (follows != null && follows.length > 0)
+      ;// ok
+    else if (keywords != null && keywords.length > 0)
+      ;// ok
+    else if (locations != null)
+      ;// ok
+    else
+      throw new ValidationException(LOGGER.translate("INBOUND_TRANSPORT_NOFILTER_ERROR"));
   }
 
   public void applyProperties() throws Exception
   {
+    consumerKey = null;
+    consumerSecret = null;
+    accessToken = null;
+    accessTokenSecret = null;
+    follows = null;
+    tracks = null;
+    locations = null;
+    count = -1;
+
     if (getProperty(OAuth.CONSUMER_KEY).isValid())
     {
       String value = (String) getProperty(OAuth.CONSUMER_KEY).getValue();
+      if (value != null)
+      {
       if (value.length() > 0)
       {
         consumerKey = cryptoService.decrypt(value);
       }
     }
+    }
 
     if (getProperty(OAuth.CONSUMER_SECRET).isValid())
     {
       String value = (String) getProperty(OAuth.CONSUMER_SECRET).getValue();
+      if (value != null)
+      {
       if (value.length() > 0)
       {
         consumerSecret = cryptoService.decrypt(value);
       }
     }
+    }
 
     if (getProperty(OAuth.ACCESS_TOKEN).isValid())
     {
       String value = (String) getProperty(OAuth.ACCESS_TOKEN).getValue();
+      if (value != null)
+      {
       if (value.length() > 0)
       {
         accessToken = cryptoService.decrypt(value);
       }
     }
+    }
 
     if (getProperty(OAuth.ACCESS_TOKEN_SECRET).isValid())
     {
       String value = (String) getProperty(OAuth.ACCESS_TOKEN_SECRET).getValue();
+      if (value != null)
+      {
       if (value.length() > 0)
       {
         accessTokenSecret = cryptoService.decrypt(value);
       }
+    }
     }
 
     StringBuilder paramsStr = new StringBuilder();
     if (getProperty("follow").isValid())
     {
       String value = (String) getProperty("follow").getValue();
+      if (value != null)
+      {
       if (StringUtils.isNotEmpty(value))
       {
         paramsStr.append("follow=" + value);
         String[] flwStrs = value.split(",");
         if (flwStrs.length > 0)
         {
-          follows = new long[flwStrs.length];
+            ArrayList<Long> followsList = new ArrayList<Long>();
+
           for (int i = 0; i < flwStrs.length; i++)
           {
-            follows[i] = Long.parseLong(flwStrs[i].trim());
+              if (flwStrs[i] != null && !flwStrs[i].trim().isEmpty())
+              {
+                try
+                {
+                  followsList.add(Long.parseLong(flwStrs[i].trim()));
+                }
+                catch (NumberFormatException e)
+                {
+                  LOGGER.warn("Failed to set follow ID: {}", e, flwStrs[i].trim());
+                }
+              }
+            }
+
+            if (followsList.size() > 0)
+            {
+              follows = new long[followsList.size()];
+              for (int index = 0; index < followsList.size(); index++)
+              {
+                follows[index] = followsList.get(index);
+              }
+            }
           }
         }
       }
@@ -173,6 +242,8 @@ public class TwitterInboundTransport extends InboundTransportBase implements Run
     if (getProperty("track").isValid())
     {
       String value = (String) getProperty("track").getValue();
+      if (value != null)
+      {
       if (value.length() > 0)
       {
         if (paramsStr.length() > 0)
@@ -188,9 +259,12 @@ public class TwitterInboundTransport extends InboundTransportBase implements Run
         }
       }
     }
+    }
     if (getProperty("locations").isValid())
     {
       String value = (String) getProperty("locations").getValue();
+      if (value != null)
+      {
       if (value.length() > 0)
       {
         if (paramsStr.length() > 0)
@@ -216,10 +290,13 @@ public class TwitterInboundTransport extends InboundTransportBase implements Run
         }
       }
     }
+    }
     // required elevated access to use
     if (getProperty("count").isValid())
     {
       Object prop = getProperty("count").getValue();
+      if (prop != null)
+      {
       count = (Integer) prop;
       if (count < -150000 || count > 150000)
       {
@@ -233,6 +310,7 @@ public class TwitterInboundTransport extends InboundTransportBase implements Run
         }
         paramsStr.append("count=" + prop.toString());
       }
+    }
     }
     if (paramsStr.length() > 0)
     {
@@ -252,6 +330,7 @@ public class TwitterInboundTransport extends InboundTransportBase implements Run
     try
     {
       applyProperties();
+      setErrorMessage("");
       setRunningState(RunningState.STARTED);
 
       ConfigurationBuilder cb = new ConfigurationBuilder();
@@ -262,7 +341,7 @@ public class TwitterInboundTransport extends InboundTransportBase implements Run
       cb.setOAuthAccessTokenSecret(accessTokenSecret);
       twitterStream = new TwitterStreamFactory(cb.build()).getInstance();
 
-      RawStreamListener rl = new RawStreamListener()
+      RawStreamListener rawStreamListener = new RawStreamListener()
         {
 
           @Override
@@ -274,6 +353,7 @@ public class TwitterInboundTransport extends InboundTransportBase implements Run
           @Override
           public void onMessage(String rawString)
           {
+            LOGGER.trace("Received Message String: {0}", rawString);
             receive(rawString);
           }
         };
@@ -289,20 +369,43 @@ public class TwitterInboundTransport extends InboundTransportBase implements Run
       else if (locations != null)
         fq.locations(locations);
       else
-        throw new Exception("INBOUND_TRANSPORT_NOFILTER_ERROR");
+        throw new Exception(LOGGER.translate("INBOUND_TRANSPORT_NOFILTER_ERROR"));
 
       fq.count(count);
 
       LOGGER.info("INBOUND_TRANSPORT_FILTER", filterString);
 
-      twitterStream.addListener(rl);
+      twitterStream.addListener(rawStreamListener);
+      twitterStream.addConnectionLifeCycleListener(connectionListener);
       twitterStream.filter(fq);
 
     }
     catch (Throwable ex)
     {
       LOGGER.error("UNEXPECTED_ERROR", ex);
+      setErrorMessage(ex.getLocalizedMessage());
       setRunningState(RunningState.ERROR);
+    }
+  }
+
+  private class TwitterConnectionLifeCycleListener implements ConnectionLifeCycleListener
+  {
+    @Override
+    public void onDisconnect()
+    {
+      LOGGER.trace("Disconnect");
+    }
+
+    @Override
+    public void onConnect()
+    {
+      LOGGER.trace("Connected");
+    }
+
+    @Override
+    public void onCleanUp()
+    {
+      LOGGER.trace("Cleanup");
     }
   }
 

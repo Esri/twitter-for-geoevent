@@ -1,11 +1,12 @@
 <?xml version="1.0"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.esri.geoevent.parent</groupId>
 		<artifactId>twitter</artifactId>
-		<version>10.6.0</version>
+    <version>${revision}</version>
 	</parent>
 	<groupId>com.esri.geoevent.transport</groupId>
 	<artifactId>twitter-transport</artifactId>
@@ -20,11 +21,6 @@
 			<scope>system</scope>
 			<systemPath>${project.basedir}/lib/http-transport-${project.version}.jar</systemPath>
 		</dependency>
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.apache.httpcomponents</groupId> -->
-<!-- 			<artifactId>httpclient</artifactId> -->
-<!-- 			<version>4.3.1</version> -->
-<!-- 		</dependency> -->
 		<dependency>
 			<groupId>org.twitter4j</groupId>
 			<artifactId>twitter4j-core</artifactId>
@@ -35,11 +31,6 @@
 			<artifactId>twitter4j-stream</artifactId>
 			<version>4.0.3</version>
 		</dependency>
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.twitter4j</groupId> -->
-<!-- 			<artifactId>twitter4j-async</artifactId> -->
-<!-- 			<version>4.0.3</version> -->
-<!-- 		</dependency> -->
 
 	</dependencies>
 
