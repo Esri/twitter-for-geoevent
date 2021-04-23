@@ -1,14 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<transport name="Twitter" domain="com.esri.geoevent.transport.inbound" type="inbound">
-	<description>${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_DESC}</description>
-	<propertyDefinitions>
-		<propertyDefinition propertyName="consumerKey" label="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_CONSUMER_KEY_LBL}" description="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_CONSUMER_KEY_LBL}" propertyType="Password" mandatory="true"  readOnly="false" defaultValue=""/>
-		<propertyDefinition propertyName="consumerSecret" label="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_CONSUMER_SECRET_LBL}" description="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_CONSUMER_SECRET_LBL}" propertyType="Password" mandatory="true"  readOnly="false" defaultValue=""/>
-		<propertyDefinition propertyName="accessToken" label="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_ACCESS_TOKEN_LBL}" description="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_ACCESS_TOKEN_LBL}" propertyType="Password" mandatory="true"  readOnly="false" defaultValue=""/>
-		<propertyDefinition propertyName="accessTokenSecret" label="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_ACCESS_TOKEN_SECRET_LBL}" description="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_ACCESS_TOKEN_SECRET_LBL}" propertyType="Password" mandatory="true"  readOnly="false" defaultValue=""/>
-		<propertyDefinition propertyName="follow" label="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_FOLLOW_LBL}" description="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_FOLLOW_DESC}" propertyType="String" mandatory="false"  readOnly="false" defaultValue=""/>
-		<propertyDefinition propertyName="track" label="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_TRACK_LBL}" description="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_TRACK_DESC}" propertyType="String" mandatory="false"  readOnly="false" defaultValue=""/>
-		<propertyDefinition propertyName="locations" label="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_LOCATIONS_LBL}" description="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_LOCATIONS_DESC}" propertyType="String" mandatory="false"  readOnly="false" defaultValue=""/>
-		<propertyDefinition propertyName="count" label="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_COUNT_LBL}" description="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_COUNT_DESC}" propertyType="Integer" mandatory="false"  readOnly="false" defaultValue="0"/>
-	</propertyDefinitions>
+<transport name="Twitter" domain="com.esri.geoevent.transport.inbound"
+  type="inbound">
+  <description>${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_DESC}
+  </description>
+  <propertyDefinitions>
+    <propertyDefinition propertyName="consumerKey"
+      label="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_CONSUMER_KEY_LBL}"
+      description="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_CONSUMER_KEY_LBL}"
+      propertyType="Password" mandatory="true" readOnly="false" defaultValue="" />
+    <propertyDefinition propertyName="consumerSecret"
+      label="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_CONSUMER_SECRET_LBL}"
+      description="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_CONSUMER_SECRET_LBL}"
+      propertyType="Password" mandatory="true" readOnly="false" defaultValue="" />
+    <propertyDefinition propertyName="accessToken"
+      label="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_ACCESS_TOKEN_LBL}"
+      description="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_ACCESS_TOKEN_LBL}"
+      propertyType="Password" mandatory="true" readOnly="false" defaultValue="" />
+    <propertyDefinition propertyName="accessTokenSecret"
+      label="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_ACCESS_TOKEN_SECRET_LBL}"
+      description="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_ACCESS_TOKEN_SECRET_LBL}"
+      propertyType="Password" mandatory="true" readOnly="false" defaultValue="" />
+    <propertyDefinition propertyName="follow"
+      label="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_FOLLOW_LBL}"
+      description="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_FOLLOW_DESC}"
+      propertyType="String" mandatory="false" readOnly="false" defaultValue="" />
+    <propertyDefinition propertyName="track"
+      label="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_TRACK_LBL}"
+      description="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_TRACK_DESC}"
+      propertyType="String" mandatory="false" readOnly="false" defaultValue="" />
+    <propertyDefinition propertyName="locations"
+      label="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_LOCATIONS_LBL}"
+      description="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_LOCATIONS_DESC}"
+      propertyType="String" mandatory="false" readOnly="false" defaultValue="" />
+    <propertyDefinition propertyName="count"
+      label="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_COUNT_LBL}"
+      description="${com.esri.geoevent.transport.twitter-transport.INBOUND_TRANSPORT_COUNT_DESC}"
+      propertyType="Integer" mandatory="false" readOnly="false" defaultValue="0" />
+  </propertyDefinitions>
 </transport>

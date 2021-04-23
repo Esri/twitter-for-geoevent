@@ -134,7 +134,7 @@ public class OAuth
   public static final String ACCESS_TOKEN_SECRET    = "accessTokenSecret";
   public static final String UTF_8                  = "UTF-8";
   private static Random      RAND                   = new Random();
-  
+
   public static Long getUserIdFromAccessToken(String accessToken)
   {
     // Get userId from accessToken
@@ -150,7 +150,7 @@ public class OAuth
     }
     catch (IndexOutOfBoundsException e)
     {
-      throw new IllegalArgumentException( LOGGER.translate("INVALID_ACCESS_TOKEN") );
+      throw new IllegalArgumentException(LOGGER.translate("INVALID_ACCESS_TOKEN"));
     }
     return userId;
   }

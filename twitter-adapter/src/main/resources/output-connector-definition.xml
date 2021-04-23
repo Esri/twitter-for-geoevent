@@ -1,26 +1,55 @@
-<connectorDefinition label="${com.esri.geoevent.adapter.twitter-adapter.OUTPUT_CONNNECTOR_LABEL}" name="twitter-out" type="outbound">
-	<description>${com.esri.geoevent.adapter.twitter-adapter.OUTPUT_CONNNECTOR_DESC}</description>
-	<adapter uri="com.esri.ges.adapter.outbound/MessageFormatter/10.6.0" />
-	<transport uri="com.esri.geoevent.transport.outbound/Twitter/10.6.0" />
-	<defaultName>twitter-out</defaultName>
-	<properties>
-		<shown>
-			<property label="${com.esri.geoevent.adapter.twitter-adapter.OUTPUT_CONNNECTOR_CONSUMER_KEY_LBL}" name="consumerKey" source="transport"/>
-			<property label="${com.esri.geoevent.adapter.twitter-adapter.OUTPUT_CONNNECTOR_CONSUMER_SECRET_LBL}" name="consumerSecret" source="transport"/>
-			<property label="${com.esri.geoevent.adapter.twitter-adapter.OUTPUT_CONNNECTOR_ACCESS_TOKEN_LBL}" name="accessToken" source="transport"/>
-			<property label="${com.esri.geoevent.adapter.twitter-adapter.OUTPUT_CONNNECTOR_ACCESS_TOKEN_SECRET_LBL}" name="accessTokenSecret" source="transport"/>
-			<property default="My Tweet ${TRACK_ID} ${START_TIME}" label="${com.esri.geoevent.adapter.twitter-adapter.OUTPUT_CONNNECTOR_MESSAGE_LBL}" name="textMessage" source="adapter"/>
-		</shown>
-		<advanced>
-			<property label="${com.esri.geoevent.adapter.twitter-adapter.OUTPUT_CONNNECTOR_CLIENT_URL_LBL}" name="clientURL" default="https://api.twitter.com/1.1/statuses/update.json" source="transport" />
-		</advanced>
-		<hidden>
-			<property default="false" label="${com.esri.geoevent.adapter.twitter-adapter.OUTPUT_CONNNECTOR_USE_CLIENT_PROXY_LBL}" name="useClientURLProxy" source="transport"/>
-			<property label="${com.esri.geoevent.adapter.twitter-adapter.OUTPUT_CONNNECTOR_CLIENT_PROXY_URL_LBL}" name="clientURLProxy" source="transport"/>
-			<property label="${com.esri.geoevent.adapter.twitter-adapter.OUTPUT_CONNNECTOR_CLIENT_PARAMS_LBL}" name="clientParameters" source="transport"/>
-			<property default="POST" label="${com.esri.geoevent.adapter.twitter-adapter.OUTPUT_CONNNECTOR_HTTP_METHOD_LBL}" name="httpMethod" source="transport"/>
-			<property default="application/x-www-form-urlencoded" label="${com.esri.geoevent.adapter.twitter-adapter.OUTPUT_CONNNECTOR_MIME_TYPE_CLIENT_LBL}" name="acceptableMimeTypesClientMode" source="transport"/>
-			<property default="application/x-www-form-urlencoded" label="${com.esri.geoevent.adapter.twitter-adapter.OUTPUT_CONNNECTOR_POST_BODY_TYPE_LBL}" name="postContentType" source="transport"/>
-		</hidden>
-	</properties>
+<connectorDefinition
+  label="${com.esri.geoevent.adapter.twitter-adapter.OUTPUT_CONNNECTOR_LABEL}"
+  name="twitter-out" type="outbound">
+  <description>${com.esri.geoevent.adapter.twitter-adapter.OUTPUT_CONNNECTOR_DESC}
+  </description>
+  <adapter uri="com.esri.ges.adapter.outbound/MessageFormatter/10.6.0" />
+  <transport uri="com.esri.geoevent.transport.outbound/Twitter/10.6.0" />
+  <defaultName>twitter-out</defaultName>
+  <properties>
+    <shown>
+      <property
+        label="${com.esri.geoevent.adapter.twitter-adapter.OUTPUT_CONNNECTOR_CONSUMER_KEY_LBL}"
+        name="consumerKey" source="transport" />
+      <property
+        label="${com.esri.geoevent.adapter.twitter-adapter.OUTPUT_CONNNECTOR_CONSUMER_SECRET_LBL}"
+        name="consumerSecret" source="transport" />
+      <property
+        label="${com.esri.geoevent.adapter.twitter-adapter.OUTPUT_CONNNECTOR_ACCESS_TOKEN_LBL}"
+        name="accessToken" source="transport" />
+      <property
+        label="${com.esri.geoevent.adapter.twitter-adapter.OUTPUT_CONNNECTOR_ACCESS_TOKEN_SECRET_LBL}"
+        name="accessTokenSecret" source="transport" />
+      <property default="My Tweet ${TRACK_ID} ${START_TIME}"
+        label="${com.esri.geoevent.adapter.twitter-adapter.OUTPUT_CONNNECTOR_MESSAGE_LBL}"
+        name="textMessage" source="adapter" />
+    </shown>
+    <advanced>
+      <property
+        label="${com.esri.geoevent.adapter.twitter-adapter.OUTPUT_CONNNECTOR_CLIENT_URL_LBL}"
+        name="clientURL"
+        default="https://api.twitter.com/1.1/statuses/update.json"
+        source="transport" />
+    </advanced>
+    <hidden>
+      <property default="false"
+        label="${com.esri.geoevent.adapter.twitter-adapter.OUTPUT_CONNNECTOR_USE_CLIENT_PROXY_LBL}"
+        name="useClientURLProxy" source="transport" />
+      <property
+        label="${com.esri.geoevent.adapter.twitter-adapter.OUTPUT_CONNNECTOR_CLIENT_PROXY_URL_LBL}"
+        name="clientURLProxy" source="transport" />
+      <property
+        label="${com.esri.geoevent.adapter.twitter-adapter.OUTPUT_CONNNECTOR_CLIENT_PARAMS_LBL}"
+        name="clientParameters" source="transport" />
+      <property default="POST"
+        label="${com.esri.geoevent.adapter.twitter-adapter.OUTPUT_CONNNECTOR_HTTP_METHOD_LBL}"
+        name="httpMethod" source="transport" />
+      <property default="application/x-www-form-urlencoded"
+        label="${com.esri.geoevent.adapter.twitter-adapter.OUTPUT_CONNNECTOR_MIME_TYPE_CLIENT_LBL}"
+        name="acceptableMimeTypesClientMode" source="transport" />
+      <property default="application/x-www-form-urlencoded"
+        label="${com.esri.geoevent.adapter.twitter-adapter.OUTPUT_CONNNECTOR_POST_BODY_TYPE_LBL}"
+        name="postContentType" source="transport" />
+    </hidden>
+  </properties>
 </connectorDefinition>

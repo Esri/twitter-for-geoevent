@@ -1,59 +1,68 @@
-<adapter name="Twitter" label="${com.esri.geoevent.adapter.twitter-adapter.ADAPTER_LABEL}" domain="com.esri.geoevent.adapter.inbound" type="inbound">
-	<description>${com.esri.geoevent.adapter.twitter-adapter.ADAPTER_DESC}</description>
-	<geoEventDefinitions>
-		<geoEventDefinition name="TweetStatus">
-			<fieldDefinitions>
-				<fieldDefinition name="possibly_sensitive_editable" type="Boolean"/>
-				<fieldDefinition name="text" type="String"/>
+<adapter name="Twitter"
+  label="${com.esri.geoevent.adapter.twitter-adapter.ADAPTER_LABEL}"
+  domain="com.esri.geoevent.adapter.inbound" type="inbound">
+  <description>${com.esri.geoevent.adapter.twitter-adapter.ADAPTER_DESC}
+  </description>
+  <geoEventDefinitions>
+    <geoEventDefinition name="TweetStatus">
+      <fieldDefinitions>
+        <fieldDefinition name="possibly_sensitive_editable"
+          type="Boolean" />
+        <fieldDefinition name="text" type="String" />
 
-				<fieldDefinition name="created_at" type="Date">
-					<fieldDefinitionTag>
-						<name>TIME_START</name>
-					</fieldDefinitionTag>
-				</fieldDefinition>
+        <fieldDefinition name="created_at" type="Date">
+          <fieldDefinitionTag>
+            <name>TIME_START</name>
+          </fieldDefinitionTag>
+        </fieldDefinition>
 
-				<fieldDefinition name="retweeted" type="Boolean"/>
-				<fieldDefinition name="retweet_count" type="Integer"/>
+        <fieldDefinition name="retweeted" type="Boolean" />
+        <fieldDefinition name="retweet_count" type="Integer" />
 
-				<fieldDefinition name="coordinates" type="Geometry">
-					<fieldDefinitionTag>
-						<name>GEOMETRY</name>
-					</fieldDefinitionTag>
-				</fieldDefinition>
+        <fieldDefinition name="coordinates" type="Geometry">
+          <fieldDefinitionTag>
+            <name>GEOMETRY</name>
+          </fieldDefinitionTag>
+        </fieldDefinition>
 
-				<fieldDefinition name="id_str" type="String">
-					<fieldDefinitionTag>
-						<name>TRACK_ID</name>
-					</fieldDefinitionTag>
-				</fieldDefinition>
-				<fieldDefinition name="in_reply_to_screen_name" type="String"/>
-				<fieldDefinition name="in_reply_to_status_id_str" type="String"/>
-				<fieldDefinition name="favorited" type="Boolean"/>
-				<fieldDefinition name="truncated" type="Boolean"/>
-				<fieldDefinition name="possibly_sensitive" type="Boolean"/>
-				<fieldDefinition name="in_reply_to_user_id_str" type="String"/>
+        <fieldDefinition name="id_str" type="String">
+          <fieldDefinitionTag>
+            <name>TRACK_ID</name>
+          </fieldDefinitionTag>
+        </fieldDefinition>
+        <fieldDefinition name="in_reply_to_screen_name"
+          type="String" />
+        <fieldDefinition name="in_reply_to_status_id_str"
+          type="String" />
+        <fieldDefinition name="favorited" type="Boolean" />
+        <fieldDefinition name="truncated" type="Boolean" />
+        <fieldDefinition name="possibly_sensitive"
+          type="Boolean" />
+        <fieldDefinition name="in_reply_to_user_id_str"
+          type="String" />
 
-				<fieldDefinition name="place" type="Group">
-					<fieldDefinitions>
-						<fieldDefinition name="id" type="String"/>
-						<fieldDefinition name="full_name" type="String"/>
-						<fieldDefinition name="url" type="String"/>
-					</fieldDefinitions>
-				</fieldDefinition>
+        <fieldDefinition name="place" type="Group">
+          <fieldDefinitions>
+            <fieldDefinition name="id" type="String" />
+            <fieldDefinition name="full_name" type="String" />
+            <fieldDefinition name="url" type="String" />
+          </fieldDefinitions>
+        </fieldDefinition>
 
-				<fieldDefinition name="user" type="Group">
-					<fieldDefinitions>
-						<fieldDefinition name="id_str" type="String"/>
-						<fieldDefinition name="name" type="String"/>
-						<fieldDefinition name="followers_count" type="Integer"/>
-						<fieldDefinition name="location" type="String"/>
-						<fieldDefinition name="screen_name" type="String"/>
-					</fieldDefinitions>
-				</fieldDefinition>
+        <fieldDefinition name="user" type="Group">
+          <fieldDefinitions>
+            <fieldDefinition name="id_str" type="String" />
+            <fieldDefinition name="name" type="String" />
+            <fieldDefinition name="followers_count"
+              type="Integer" />
+            <fieldDefinition name="location" type="String" />
+            <fieldDefinition name="screen_name" type="String" />
+          </fieldDefinitions>
+        </fieldDefinition>
 
-				<fieldDefinition name="geolocated" type="Boolean"/>
+        <fieldDefinition name="geolocated" type="Boolean" />
 
-			</fieldDefinitions>
-		</geoEventDefinition>
-	</geoEventDefinitions>
+      </fieldDefinitions>
+    </geoEventDefinition>
+  </geoEventDefinitions>
 </adapter>

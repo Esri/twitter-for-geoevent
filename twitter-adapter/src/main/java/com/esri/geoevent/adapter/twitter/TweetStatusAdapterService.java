@@ -33,25 +33,25 @@ import com.esri.ges.core.component.ComponentException;
 
 public class TweetStatusAdapterService extends AdapterServiceBase
 {
-	public TweetStatusAdapterService()
-	{
-		XmlAdapterDefinition xmlAdapterDefinition = new XmlAdapterDefinition(getResourceAsStream("tweetstatus-adapter-definition.xml"));
-		try
-		{
-			xmlAdapterDefinition.loadConnector(getResourceAsStream("input-connector-definition.xml"));
-			xmlAdapterDefinition.loadConnector(getResourceAsStream("output-connector-definition.xml"));
-		}
-		catch (JAXBException e)
-		{
-			throw new RuntimeException(e);
-		}
-		definition = xmlAdapterDefinition;
-	}
+  public TweetStatusAdapterService()
+  {
+    XmlAdapterDefinition xmlAdapterDefinition = new XmlAdapterDefinition(getResourceAsStream("tweetstatus-adapter-definition.xml"));
+    try
+    {
+      xmlAdapterDefinition.loadConnector(getResourceAsStream("input-connector-definition.xml"));
+      xmlAdapterDefinition.loadConnector(getResourceAsStream("output-connector-definition.xml"));
+    }
+    catch (JAXBException e)
+    {
+      throw new RuntimeException(e);
+    }
+    definition = xmlAdapterDefinition;
+  }
 
-	@Override
-	public Adapter createAdapter() throws ComponentException
-	{
-		return new TweetStatusAdapter(definition);
-	}
+  @Override
+  public Adapter createAdapter() throws ComponentException
+  {
+    return new TweetStatusAdapter(definition);
+  }
 
 }
