@@ -1,5 +1,7 @@
 # twitter-for-geoevent
 
+**The Twitter Connector for GeoEvent Server has been deprecated and will no longer be actively developed due to the release of Twitter API v2. More information on accessing the Twitter API Standard v1.1 can be found [here](https://developer.twitter.com/en/docs/twitter-api/getting-started/about-twitter-api#v2-access-level).**
+
 ArcGIS GeoEvent Server sample Twitter input and output connectors for receiving and sending tweets.
 
 ![App](twitter-for-geoevent.png?raw=true)
